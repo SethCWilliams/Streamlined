@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class Folder(models.Model):
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
-    title = models.CharField(max_length=255)
+    folder_title = models.CharField(max_length=255)
     icon = models.ImageField()
     programs = models.ManyToManyField('Program')
 

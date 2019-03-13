@@ -2,9 +2,13 @@ import React, {Component} from 'react';
 import './App.css';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import action from './action.jpg'
 
 
-export default class Modal extends React.Component {
+
+
+export default class FolderModal extends Component {
   constructor(props, context) {
     super(props, context);
 
@@ -26,12 +30,12 @@ export default class Modal extends React.Component {
 
   render() {
     return(
-      <>
+      <div>
         <Button variant="primary" onClick={this.handleShow}>
             Add
         </Button>
 
-        <Modal show={this.state.show} onHide={this.handleClose}>
+        <Modal show={this.state.show} onClick={this.props.addFolder} onHide={this.handleClose}>
             <Modal.Title>New Folder</Modal.Title>
           <Modal.Body>Title:<input placeholder='genre, user, etc...' type="text"/></Modal.Body>
             <Modal.Body><input type="file"/></Modal.Body>
@@ -44,7 +48,7 @@ export default class Modal extends React.Component {
             </Button>
           </Modal.Footer>
         </Modal>
-      </>
+      </div>
     );
   }
 }
