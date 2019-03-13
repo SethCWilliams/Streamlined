@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% for movie in movies %}
+        <div class="card d-inline-block" style="width: 18rem;">
+            <a href=""><img src="{{ movie.poster_240x342 }}" class="card-img-top" alt="..."></a>
+          <div class="card-body">
+            <h5 class="card-title"><a href="">{{ movie.title }}</a></h5>
+          </div>
+        </div>
+    {% endfor movies %}
+
+{% endblock content %}
