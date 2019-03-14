@@ -1,20 +1,20 @@
 import React, {Component} from 'react';
 import './App.css';
 import Card from "react-bootstrap/Card";
-import action from "./action.jpg";
+
 
 export default class NewFolder extends Component {
-    constructor(props) {
-        super(props);
-
-    }
+    // constructor(props) {
+    //     super(props);
+    //
+    // }
     render() {
         console.log(this.props.newfolders);
         let folders = this.props.newfolders.map((folder) => {
             return(
                 <div className='App'>
                     <Card style={{width: '12rem'}}>
-                         <Card.Img className='cover' variant='top' src={action}/>
+                         <Card.Img className='cover' variant='top' src={folder.icon}/>
                          <Card.Body>
                              <Card.Title>{folder.folder_title}</Card.Title>
                              <Card.Text className='card-text'>

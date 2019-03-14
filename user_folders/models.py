@@ -6,7 +6,7 @@ class Folder(models.Model):
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     folder_title = models.CharField(max_length=255)
     icon = models.ImageField()
-    programs = models.ManyToManyField('Program')
+    programs = models.ManyToManyField('Program', blank=True)
 
 
 class Program(models.Model):

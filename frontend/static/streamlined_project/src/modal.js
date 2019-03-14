@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import './App.css';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import action from './action.jpg'
+
+
 
 
 export default class FolderModal extends Component {
@@ -13,6 +13,7 @@ export default class FolderModal extends Component {
         this.handleShow = this.handleShow.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleInput = this.handleInput.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
 
         this.state = {
             show: false,
@@ -25,14 +26,14 @@ export default class FolderModal extends Component {
     handleInput(e) {
         let obj = {};
 
-        if (e.target.name !== 'image') {
+        if (e.target.name !== 'icon') {
             obj[e.target.name] = e.target.value;
         } else {
             let icon = e.target.files[0];
-            obj.file = icon;
+            obj.icon = icon;
 
             let fileReader = new FileReader();
-            fileReader.onload = () => this.setState({icon: fileReader.result});
+            // fileReader.onload = () => this.setState({icon: fileReader.result});
             fileReader.readAsDataURL(icon);
         }
         this.setState(obj);
@@ -46,6 +47,11 @@ export default class FolderModal extends Component {
 
     handleShow() {
         this.setState({show: true});
+    }
+
+    handleSubmit() {
+        console.log(this.state.folder_title);
+        this.props.addFolder({folder_title: this.state.folder_title, icon: this.state.icon})
     }
 
     render() {
@@ -76,7 +82,10 @@ export default class FolderModal extends Component {
                         <Button variant="secondary" onClick={this.handleClose}>
                             Close
                         </Button>
-                        <Button variant="primary" onClick={this.handleClose}>
+                        <Button variant="primary" onClick={() => {
+                            this.handleClose();
+                            this.handleSubmit();
+                        }}>
                             Save Changes
                         </Button>
                     </Modal.Footer>
