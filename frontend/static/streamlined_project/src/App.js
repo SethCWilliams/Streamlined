@@ -15,8 +15,7 @@ class App extends Component {
         };
         this.addFolder = this.addFolder.bind(this);
     }
-//I need to start getting addfolder setup so that it can update the state of folders
-    //when someone adds a new folder. look at 83 react image board for help.
+
     addFolder(dataObject){
         console.log(dataObject);
         let folder_title = dataObject.folder_title;

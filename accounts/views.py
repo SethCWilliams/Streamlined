@@ -35,4 +35,4 @@ class SignupView(TemplateView):
         # Login the user (does the session table/cookie stuff)
         login(self.request, user)
 
-        return HttpResponseRedirect(reverse('streamlined:home'))
+        return HttpResponseRedirect(reverse('frontend:index'))

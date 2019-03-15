@@ -7,23 +7,23 @@
           <div class="card-body">
             <h5 class="card-title"><a href="">{{ movie.title }}</a></h5>
           </div>
-            <button>Movie Details</button>
-            <button type="button" class="btn btn-primary" id="add-movie">Add Movie</button>
+            <button type="button" class="btn btn-primary">Movie Details</button>
+            <button type="button" data-toggle="modal" data-target=".add-modal" class="btn btn-primary">Add Movie</button>
         </div>
     {% endfor movies %}
 
-
-    <div class="modal" tabindex="-1" role="dialog">
+    {% for folder in folders %}
+    <div class="modal add-modal" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Modal title</h5>
+            <h5 class="modal-title">Your Folders</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <p>Modal body text goes here.</p>
+            <p>{{ folder.folder_title }} <label class="radio"><input type="radio"></label></p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary">Save changes</button>
@@ -32,6 +32,7 @@
         </div>
       </div>
     </div>
+    {% endfor folders %}
 
 
 {% endblock content %}
