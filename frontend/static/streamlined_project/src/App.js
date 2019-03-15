@@ -24,6 +24,7 @@ class App extends Component {
         console.log('icon', icon);
 
         let formData = new FormData();
+        // this.setState({folders: dataObject});
         formData.append('folder_title', folder_title);
         formData.append('icon', icon);
         fetch(`/api/folder/`, {

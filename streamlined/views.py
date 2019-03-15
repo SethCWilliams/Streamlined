@@ -13,8 +13,9 @@ def browse(request):
     movies = response.json()
 
     folders = Folder.objects.filter(user=request.user)
+    print(folders)
 
     return render(request, 'browse.html', {
         'movies': movies['results'],
-        'folders': folders
+        'folders': folders,
     })

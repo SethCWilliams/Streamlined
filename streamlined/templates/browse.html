@@ -12,7 +12,7 @@
         </div>
     {% endfor movies %}
 
-    {% for folder in folders %}
+
     <div class="modal add-modal" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -23,7 +23,9 @@
             </button>
           </div>
           <div class="modal-body">
+              {% for folder in folders %}
             <p>{{ folder.folder_title }} <label class="radio"><input type="radio"></label></p>
+              {% endfor folders %}
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary">Save changes</button>
@@ -32,7 +34,6 @@
         </div>
       </div>
     </div>
-    {% endfor folders %}
 
 
 {% endblock content %}
