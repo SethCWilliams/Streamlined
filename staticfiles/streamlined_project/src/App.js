@@ -1,59 +1,52 @@
 import React, {Component} from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import Card from 'react-bootstrap/Card'
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
 import plus from './plus.png';
-
-
-class Example extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-
-    this.handleShow = this.handleShow.bind(this);
-    this.handleClose = this.handleClose.bind(this);
-
-    this.state = {
-        show: false,
-    };
-  }
-
-  handleClose() {
-    this.setState({ show: false});
-  }
-
-  handleShow() {
-    this.setState({ show: true});
-  }
-
-  render() {
-    return(
-      <>
-        <Button variant="primary" onClick={this.handleShow}>
-            Add
-        </Button>
-
-        <Modal show={this.state.show} onHide={this.handleClose}>
-            <Modal.Title>New Folder</Modal.Title>
-          <Modal.Body>Title:<input placeholder='genre, user, etc...' type="text"/></Modal.Body>
-            <Modal.Body><input type="file"/></Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={this.handleClose}>
-              Close
-            </Button>
-            <Button variant="primary" onClick={this.handleClose}>
-              Save Changes
-            </Button>
-          </Modal.Footer>
-        </Modal>
-      </>
-    );
-  }
-}
-
+import FolderModal from './Modal'
+import NewFolder from "./NewFolder";
 
 class App extends Component {
+    constructor(props){
+        super(props);
+
+        this.state = {
+            folders: [],
+        };
+        this.addFolder = this.addFolder.bind(this);
+    }
+
+    addFolder(dataObject){
+        console.log(dataObject);
+        let folder_title = dataObject.folder_title;
+        console.log(folder_title);
+        let icon = dataObject.icon;
+        console.log('icon', icon);
+
+        let formData = new FormData();
+        // this.setState({folders: dataObject});
+        formData.append('folder_title', folder_title);
+        formData.append('icon', icon);
+        fetch(`/api/folder/`, {
+            method: 'POST', body: formData
+        }).then(response => response.json())
+            .then(json => console.log('success!', JSON.stringify(json)))
+            .catch(error => console.log('ERROR!', error))
+    }
+
+    componentDidMount() {
+        fetch(`/api/folder/`, {
+            method: 'GET'
+        }).then(response => {
+            if(response.status === 200){
+                return response.json()
+            }else {
+                throw new Error("something's wrong.")
+            }
+        }).then(json => this.setState({folders: json}))
+            .catch(error => console.log(error));
+    }
+
     render() {
         return(
             <div className='App'>
@@ -63,9 +56,10 @@ class App extends Component {
                         <Card.Title>Add A List</Card.Title>
                         <Card.Text className='card-text'>
                         </Card.Text>
-                        <Example/>
+                        <FolderModal addFolder={this.addFolder}/>
                     </Card.Body>
-                </Card>;
+                </Card>
+                <NewFolder newfolders={this.state.folders}/>
             </div>
         );
     }
