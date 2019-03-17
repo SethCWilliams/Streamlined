@@ -36,6 +36,9 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'frontend/static/streamlined_project/build/static'),
 )
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "static_media")
+
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
 AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
@@ -58,6 +61,7 @@ ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
     'streamlined-app.herokuapp.com',
+    'sethcwilliams.com',
 ]
 
 
@@ -97,7 +101,7 @@ ROOT_URLCONF = 'conf.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
