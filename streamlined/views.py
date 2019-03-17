@@ -5,6 +5,8 @@ from user_folders.models import Folder
 from rest_framework.viewsets import ModelViewSet
 
 
+ids = []
+
 class IndexView(TemplateView):
     template_name = 'index.html'
 
@@ -12,11 +14,21 @@ class IndexView(TemplateView):
 def browse(request):
     response = requests.get('http://api-public.guidebox.com/v2/movies?api_key=0a40830bfa01ed3fca505f5e01ab1a5d54e281da&sources=netflix&limit=250&offset=600')
     movies = response.json()
+    # for results in movies:
+    #     if movies[results] == 'results':
+    #         print('got me')
+    results = movies['results']
+    # print(results)
+    for result in results:
+        ids.append(result['id'])
+        print(result['id'])
+        print(ids)
 
     folders = Folder.objects.filter(user=request.user)
-    name = "John"
-    age = 23
-    print("%s is %d years old." % (name, age))
+    # example of string formatting
+    # name = "John"
+    # age = 23
+    # print("%s is %d years old." % (name, age))
 
     return render(request, 'browse.html', {
         'movies': movies['results'],
@@ -26,6 +38,7 @@ def browse(request):
 
 class DetailView(TemplateView):
     template_name = 'detail.html'
+    print(ids)
 
     def get_context_data(self, **kwargs):
         response = requests.get(
@@ -39,7 +52,7 @@ class DetailView(TemplateView):
             'id': movie['id'],
             'overview': movie['overview'],
             'poster': movie['poster_240x342'],
-            # 'genres': movie.genres['id']
+            'genres': movie['genres']
 
         }
 

@@ -2,10 +2,11 @@
 
 {% block content %}
     {% for movie in movies %}
+        <p>{{ movie.id }}</p>
         <div class="card d-inline-block" style="width: 18rem;">
             <a href=""><img src="{{ movie.poster_240x342 }}" class="card-img-top" alt="..."></a>
           <div class="card-body">
-            <h5 class="card-title"><a href=/details>{{ movie.title }}</a></h5>
+            <h5 class="card-title" id={{ movie.id }}><a href=/details>{{ movie.title }}</a></h5>
           </div>
             <button type="button" class="btn btn-primary">Movie Details</button>
             <button type="button" data-toggle="modal" data-target=".add-modal" class="btn btn-primary">Add Movie</button>
