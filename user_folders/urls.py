@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.urls import path
+from . import views
 
 from .api import FolderViewSet, ProgramViewSet
 
@@ -12,4 +13,7 @@ urlpatterns = [
        'get': 'list',
        'post': 'create',
     }), name='program_api'),
+    path('browse/', views.browse, name='browse'),
+    path('<int:ref_id>/', views.DetailView.as_view(), name='detail'),
+# <int:ref_id>/
 ]

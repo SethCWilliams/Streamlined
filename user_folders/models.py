@@ -8,6 +8,9 @@ class Folder(models.Model):
     icon = models.ImageField()
     programs = models.ManyToManyField('Program', blank=True)
 
+    def __str__(self):
+        return self.folder_title
+
 
 class Program(models.Model):
     title = models.CharField(max_length=255)

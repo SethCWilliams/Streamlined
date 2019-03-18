@@ -27,7 +27,7 @@ class App extends Component {
         // this.setState({folders: dataObject});
         formData.append('folder_title', folder_title);
         formData.append('icon', icon);
-        fetch(`/api/folder/`, {
+        fetch(`/program/api/folder/`, {
             method: 'POST', body: formData
         }).then(response => response.json())
             .then(json => console.log('success!', JSON.stringify(json)))
@@ -35,7 +35,7 @@ class App extends Component {
     }
 
     componentDidMount() {
-        fetch(`/api/folder/`, {
+        fetch(`/program/api/folder/`, {
             method: 'GET'
         }).then(response => {
             if(response.status === 200){
