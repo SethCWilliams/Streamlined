@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import './App.css';
 import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button"
+// import "user_folders/templates/user_folders/browse.html"
 
 
 export default class NewFolder extends Component {
@@ -20,6 +22,7 @@ export default class NewFolder extends Component {
                              <Card.Text className='card-text'>
                              </Card.Text>
                          </Card.Body>
+                        <Button href="/program/folder">Folder View</Button>
                      </Card>
                  </div>
              )

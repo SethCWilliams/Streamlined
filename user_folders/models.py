@@ -20,3 +20,6 @@ class Program(models.Model):
     overview = models.TextField()
     netflix_url = models.URLField(blank=True)
     hulu_url = models.URLField(blank=True)
+
+    def __str__(self):
+        return self.ref_id

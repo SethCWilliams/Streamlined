@@ -17,6 +17,7 @@ gunicorn = "*"
 psycopg2-binary = "*"
 boto3 = "*"
 django-storages = "*"
+justwatch = "*"
 
 [requires]
 python_version = "3.7"

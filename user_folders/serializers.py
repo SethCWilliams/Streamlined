@@ -11,7 +11,6 @@ class FolderSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-
 class ProgramSerializer(serializers.ModelSerializer):
     class Meta:
         model = Program
