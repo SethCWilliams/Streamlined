@@ -12,7 +12,6 @@ class CsrfExemptMixin(SessionAuthentication):
 
 
 class FolderViewSet(LoginRequiredMixin, ModelViewSet):
-    queryset = Folder.objects.all()
     serializer_class = FolderSerializer
     authentication_classes = (CsrfExemptMixin,)
 
@@ -31,5 +30,8 @@ class ProgramViewSet(ModelViewSet):
     authentication_classes = (CsrfExemptMixin,)
 
 
+class AddProgramViewSet(ModelViewSet):
+
+    queryset = Folder.objects.all()
 # class FolderContentViewSet(ModelViewSet):
 #

@@ -7,24 +7,6 @@ from django.urls import reverse
 from justwatch import JustWatch
 
 
-# def post(self, request, *args, **kwargs):
-#     print('hello')
-#     ref_id = '25254'
-#     program = Program()
-#     # this could be a get_or_create if I didn't need code to look
-#     # clean due to so many program req. to save
-#     try:
-#         program = Program.objects.get(ref_id=ref_id)
-#     except Program.DoesNotExist:
-#         program.title = '',
-#         program.ref_id = '',
-#         program.overview = '',
-#         program.poster = '',
-#         program.rating = '',
-#         program.netflix_url = '',
-#         program.hulu_url = '',
-#         program.save()
-
 class BrowseView(TemplateView):
     template_name = 'user_folders/browse.html'
 
@@ -73,6 +55,7 @@ class DetailView(TemplateView):
         #     content_types=['movie'],
         #     genres=['hrr'],
         # )
+        # print(results_by_multiple)
         # for key in results_by_multiple:
         #     if key == 'items':
         #         # print(results_by_multiple[key])
@@ -97,7 +80,6 @@ class DetailView(TemplateView):
         return ctx
 
     def post(self, request, *args, **kwargs):
-        print('hello')
         ref_id = self.kwargs.get('ref_id')
 
 
@@ -127,6 +109,9 @@ class DetailView(TemplateView):
             program.hulu_url = hulu_url
             program.save()
 
-
-
+        folder_ids = self.request.POST.getlist('folder')
+        folders = Folder.objects.filter(id__in=folder_ids)
+        for folder in folders:
+            folder.programs.add(program)
+        #     print('what is here', folder)
         return HttpResponseRedirect(reverse('programs:browse'))

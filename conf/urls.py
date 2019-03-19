@@ -21,7 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('streamlined.urls')),
     path('', include('accounts.urls')),
-    path('program/', include('user_folders.urls')),
+    path('', include('user_folders.urls')),
     path('', include('frontend.urls')),
 
 ]

@@ -19,8 +19,8 @@ urlpatterns = [
         # 'put': 'update',
         # 'delete': 'destroy',
     }), name='program_api'),
-    path('browse/', views.BrowseView.as_view(), name='browse'),
-    path('<int:ref_id>/', views.DetailView.as_view(), name='detail'),
+    path('program/browse/', views.BrowseView.as_view(), name='browse'),
+    path('program/<int:ref_id>/', views.DetailView.as_view(), name='detail'),
     # path('folder_content/', views.FolderContentViewset.as_view({
     #     'get': 'list',
     #     'post': 'create',

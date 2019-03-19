@@ -1,10 +1,11 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import Card from 'react-bootstrap/Card'
 import plus from './plus.png';
 import FolderModal from './Modal'
 import NewFolder from "./NewFolder";
+
 
 class App extends Component {
     constructor(props){
@@ -27,7 +28,7 @@ class App extends Component {
         // this.setState({folders: dataObject});
         formData.append('folder_title', folder_title);
         formData.append('icon', icon);
-        fetch(`/program/api/folder/`, {
+        fetch(`/api/folder/`, {
             method: 'POST', body: formData
         }).then(response => response.json())
             .then(json => console.log('success!', JSON.stringify(json)))
@@ -35,7 +36,7 @@ class App extends Component {
     }
 
     componentDidMount() {
-        fetch(`/program/api/folder/`, {
+        fetch(`/api/folder/`, {
             method: 'GET'
         }).then(response => {
             if(response.status === 200){
