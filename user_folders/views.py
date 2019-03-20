@@ -12,8 +12,9 @@ class BrowseView(TemplateView):
 
     def get_context_data(self, **kwargs):
         response = requests.get(
-            'http://api-public.guidebox.com/v2/movies?api_key=0a40830bfa01ed3fca505f5e01ab1a5d54e281da&sources=netflix&limit=250&offset=600')
+            'http://api-public.guidebox.com/v2/movies?api_key=0a40830bfa01ed3fca505f5e01ab1a5d54e281da&sources=hulu_plus,netflix&limit=250')
         movies = response.json()
+        print(movies)
         # this part is for me trying to move the ref_id to the url bar
         # results = movies['results']
         # print(results)
@@ -61,8 +62,6 @@ class DetailView(TemplateView):
         #         # print(results_by_multiple[key])
         #         for piece in key:
         #             print(piece)
-
-        ref_id = self.kwargs.get('ref_id')
 
         movie = self.get_movie_data()
         ctx = {
