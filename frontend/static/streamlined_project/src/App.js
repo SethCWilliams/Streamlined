@@ -5,6 +5,7 @@ import Card from 'react-bootstrap/Card'
 import plus from './plus.png';
 import FolderModal from './Modal'
 import NewFolder from "./NewFolder";
+// import * as edit from 'react-edit';
 
 
 class App extends Component {
@@ -13,9 +14,15 @@ class App extends Component {
 
         this.state = {
             folders: [],
+            // isEditing: false,
         };
         this.addFolder = this.addFolder.bind(this);
+        // this.doEdit= this.doEdit.bind(this);
     }
+
+    // doEdit(folders){
+    //     this.setState({isEditing: folders});
+    // }
 
     addFolder(dataObject){
         console.log(dataObject);

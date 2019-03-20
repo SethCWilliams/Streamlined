@@ -11,25 +11,34 @@ class BrowseView(TemplateView):
     template_name = 'user_folders/browse.html'
 
     def get_context_data(self, **kwargs):
+        hardcode = 'Terminator'
         response = requests.get(
-            'http://api-public.guidebox.com/v2/movies?api_key=0a40830bfa01ed3fca505f5e01ab1a5d54e281da&sources=hulu_plus,netflix&limit=250')
-        movies = response.json()
-        print(movies)
-        # this part is for me trying to move the ref_id to the url bar
-        # results = movies['results']
-        # print(results)
-        # for result in results:
-        #     ids.append(result['id'])
-        #     print(result['id'])
-        #     print(ids)
+            'http://api-public.guidebox.com/v2/search/?api_key=0a40830bfa01ed3fca505f5e01ab1a5d54e281da&type=movie&field=title&query={}'.format(
+                hardcode))
+        movie = response.json()
+        print(movie)
 
-        ctx = {
-            'movies': movies['results'],
-            'folders': Folder.objects.filter(user=self.request.user),
-            # 'ref_id': movies.results['id']
-        }
 
-        return ctx
+    # def get_context_data(self, **kwargs):
+    #     response = requests.get(
+    #         'http://api-public.guidebox.com/v2/movies?api_key=0a40830bfa01ed3fca505f5e01ab1a5d54e281da&sources=hulu_plus,netflix&limit=250')
+    #     movies = response.json()
+    #     print(movies)
+    #     # this part is for me trying to move the ref_id to the url bar
+    #     # results = movies['results']
+    #     # print(results)
+    #     # for result in results:
+    #     #     ids.append(result['id'])
+    #     #     print(result['id'])
+    #     #     print(ids)
+    #
+    #     ctx = {
+    #         'movies': movies['results'],
+    #         'folders': Folder.objects.filter(user=self.request.user),
+    #         # 'ref_id': movies.results['id']
+    #     }
+    #
+    #     return ctx
 
 
 class DetailView(TemplateView):

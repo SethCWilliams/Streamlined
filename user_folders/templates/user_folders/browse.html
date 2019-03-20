@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <form method="get" action={% url 'programs:browse' %} >
+        <input type="text" placeholder="Search by title...">
+        <button type="submit" class="btn btn-danger">Submit</button>
+    </form>
 
     {% for movie in movies %}
         <div class="card d-inline-block" style="width: 18rem;">
