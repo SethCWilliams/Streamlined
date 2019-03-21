@@ -5,3 +5,12 @@
 .card-body {
     margin: auto;
 }
+
+.background {
+    background-image: radial-gradient( #d9d9d9, #f28500);
+}
+
+.button-width {
+    width: 49%;
+    display: inline-block;
+}

@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
-import './App.css';
+import '../containers/App.css';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-
-
 
 
 export default class FolderModal extends Component {

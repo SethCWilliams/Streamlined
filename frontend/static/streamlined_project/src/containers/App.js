@@ -2,9 +2,9 @@ import React, {Component, useState} from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import Card from 'react-bootstrap/Card'
-import plus from './plus.png';
-import FolderModal from './Modal'
-import NewFolder from "./NewFolder";
+import plus from '../plus.png';
+import FolderModal from '../component/Modal'
+import NewFolder from "../component/NewFolder";
 // import * as edit from 'react-edit';
 
 
@@ -14,7 +14,7 @@ class App extends Component {
 
         this.state = {
             folders: [],
-            // isEditing: false,
+            isEditing: false,
         };
         this.addFolder = this.addFolder.bind(this);
         // this.doEdit= this.doEdit.bind(this);
@@ -22,6 +22,10 @@ class App extends Component {
 
     // doEdit(folders){
     //     this.setState({isEditing: folders});
+    // }
+
+    // editFolder(dataObject){
+    //
     // }
 
     addFolder(dataObject){
@@ -56,6 +60,7 @@ class App extends Component {
     }
 
     render() {
+        console.log(this.state.folders);
         return(
             <div className='App'>
                 <Card style={{width: '12rem'}}>

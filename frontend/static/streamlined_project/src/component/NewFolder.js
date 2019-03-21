@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './App.css';
+import '../containers/App.css';
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import FolderContent from './FolderContent'
@@ -30,8 +30,8 @@ export default class NewFolder extends Component {
                              <Card.Text className='card-text'>
                              </Card.Text>
                          </Card.Body>
-                        <Button onClick={() => {this.showPrograms(folder)}}>Edit Folder</Button>
-                        <Button>Folder View</Button>
+                        <Button>Edit Folder</Button>
+                        <Button onClick={() => {this.showPrograms(folder)}}>Folder View</Button>
                      </Card>
                  </div>
              )
