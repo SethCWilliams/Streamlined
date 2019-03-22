@@ -43,10 +43,12 @@ class BrowseView(FormView):
 
     def get_context_data(self, **kwargs):
         print('body', self.request.body)
+        # if q exists, it will return the value of q, if it doesn't exit, it returns None'
+        content_type = self.request.GET.get('q', default='movies')
+        # .format(content_type
         response = requests.get(
-            'http://api-public.guidebox.com/v2/movies?api_key=0a40830bfa01ed3fca505f5e01ab1a5d54e281da&sources=hulu_plus,netflix&limit=250')
+            'http://api-public.guidebox.com/v2/{}?api_key=0a40830bfa01ed3fca505f5e01ab1a5d54e281da&sources=hulu_plus,netflix&limit=250'.format(content_type))
         movielist = response.json()
-        # print(movies)
         # starting to play with paginator, but will come back after i get other more important stuff done
         # paginator = Paginator(movielist['results'], 50)
         # print('hello', paginator)

@@ -1,15 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {#method="post" action={% url 'programs:browse' %}#}
-    <form method="post" action={% url 'programs:browse' %}>
+    <form method="post" action="{% url 'programs:browse' %}">
         {% csrf_token %}
         <label for="">Search:</label>
         <input type="text" name="title">
         <button type="submit" class="btn btn-danger">Submit</button>
     </form>
-    <button class="button-width">Movies</button>
-    <button class="button-width">Shows</button>
+    <a href="{% url 'programs:browse' %}?q=movies" class=" btn btn-primary button-width">Movies</a>
+    <a href="{% url 'programs:browse' %}?q=shows" class="btn btn-primary button-width">Shows</a>
 
     {% for movie in movies %}
         <div class="card d-inline-block" style="width: 18rem;">
