@@ -1,15 +1,17 @@
-import React, {Component, useState} from 'react';
+import React, {Component} from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import Card from 'react-bootstrap/Card'
 import plus from '../plus.png';
 import FolderModal from '../component/Modal'
 import NewFolder from "../component/NewFolder";
+import EditFolder from "../component/EditFolder";
+
 // import * as edit from 'react-edit';
 
 
 class App extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -17,23 +19,62 @@ class App extends Component {
             isEditing: false,
         };
         this.addFolder = this.addFolder.bind(this);
-        // this.doEdit= this.doEdit.bind(this);
+        this.doEdit = this.doEdit.bind(this);
+        this.updateFolder = this.updateFolder.bind(this);
+        this.deleteFolder = this.deleteFolder.bind(this);
     }
 
-    // doEdit(folders){
-    //     this.setState({isEditing: folders});
-    // }
+    doEdit(folder) {
+        this.setState({isEditing: folder});
+    }
 
-    // editFolder(dataObject){
-    //
-    // }
+    updateFolder(dataObj) {
 
-    addFolder(dataObject){
-        console.log(dataObject);
+        let myObj = Object.assign({}, this.state.isEditing, dataObj);
+        let index = this.state.folders.indexOf(this.state.isEditing);
+
+        let folders = [...this.state.folders];
+        folders[index] = myObj;
+
+        // this.setState({folders, isEditing: false});
+
+
+        fetch(`/api/folder/${this.state.isEditing.id}/`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({dataObj})
+        }).then(response => response.json())
+            .then(json => {
+                this.setState({folders, isEditing: false});
+                console.log('Put Success', JSON.stringify(json));
+                console.log(json)
+            })
+            .catch(error => console.log('Error', error));
+        // this.setState({isEditing: false})
+    }
+
+    deleteFolder() {
+        // let myObj = Object.assign({}, this.state.isEditing, dataObj);
+        // let index = this.state.folders.indexOf(this.state.isEditing);
+        //
+        // let folders = [...this.state.folders];
+        // folders[index] = myObj;
+        fetch(`/api/folder/${this.state.isEditing.id}/`, {
+            method: 'DELETE',
+        }).then(response => response.json())
+            .then(json => {
+                console.log('Put Success', JSON.stringify(json));
+                console.log(json)
+            })
+            .catch(error => console.log('Error', error));
+        this.setState({isEditing: false})
+    }
+
+    addFolder(dataObject) {
         let folder_title = dataObject.folder_title;
-        console.log(folder_title);
         let icon = dataObject.icon;
-        console.log('icon', icon);
 
         let formData = new FormData();
         // this.setState({folders: dataObject});
@@ -50,9 +91,9 @@ class App extends Component {
         fetch(`/api/folder/`, {
             method: 'GET'
         }).then(response => {
-            if(response.status === 200){
+            if (response.status === 200) {
                 return response.json()
-            }else {
+            } else {
                 throw new Error("something's wrong.")
             }
         }).then(json => this.setState({folders: json}))
@@ -60,8 +101,8 @@ class App extends Component {
     }
 
     render() {
-        console.log(this.state.folders);
-        return(
+        console.log('edit', this.state.isEditing);
+        return (
             <div className='App'>
                 <Card style={{width: '12rem'}}>
                     <Card.Img className='cover' variant='top' src={plus}/>
@@ -72,7 +113,12 @@ class App extends Component {
                         <FolderModal addFolder={this.addFolder}/>
                     </Card.Body>
                 </Card>
-                <NewFolder newfolders={this.state.folders}/>
+                {this.state.isEditing ? (
+                    <EditFolder folder={this.state.isEditing} update={this.updateFolder}
+                                delete={this.deleteFolder}/>) : (
+
+                    <NewFolder newfolders={this.state.folders} edit={this.doEdit}/>
+                )}
             </div>
         );
     }

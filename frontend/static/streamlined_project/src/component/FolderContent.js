@@ -15,16 +15,16 @@ export default class FolderContent extends Component {
 
     render() {
 
-        console.log('foldercontent', this.props.foldercontent);
+        // console.log('foldercontent', this.props.foldercontent);
         let programs = this.props.foldercontent.programs;
-        console.log(programs);
+        // console.log(programs);
         // if (programs !== undefined) {
         // still trying to figure out how to get programlist out and accessible
 
         // }
         return (
             <div className='App'>
-                <h1>test</h1>
+                <h1>Content</h1>
                 {this.props.foldercontent.folder_title}
                 {programs &&
                 programs.map((program) => {

@@ -10,33 +10,49 @@ from django.core.paginator import Paginator
 
 class BrowseView(FormView):
     template_name = 'user_folders/browse.html'
+    # Trying to get my add to folder from browse function to work
+    # def get_movie_data(self):
+    #     ref_id = self.kwargs.get('movie.id')
+    #
+    #     #     program = Program.objects.get(ref_id=ref_id)
+    #     #
+    #     # except Program.DoesNotExist:
+    #         # ref_id = self.kwargs.get('ref_id')
+    #     response = requests.get(
+    #         'http://api-public.guidebox.com/v2/movies/{}?api_key=0a40830bfa01ed3fca505f5e01ab1a5d54e281da'.format(
+    #             ref_id))
+    #     program = response.json()
+    #     print('code', response.status_code)
+    #     return program
 
 
     # def get_search_data(self, **kwargs):
-    #     if request.method == 'POST':
+    #     if self.request.method == 'POST':
     #         print('i am firing')
-        # movie_search = self.request.form('title')
-        # print(movie_search)
-        # response = requests.get(
-        #     'http://api-public.guidebox.com/v2/search/?api_key=0a40830bfa01ed3fca505f5e01ab1a5d54e281da&type=movie&field=title&query={}'.format(
-        #         movie_search))
-        # movie = response.json()
-        # print(movie)
-        # return HttpResponseRedirect(reverse('programs:detail'))
+    #     movie_search = self.request.form('title')
+    #     print(movie_search)
+    #     response = requests.get(
+    #         'http://api-public.guidebox.com/v2/search/?api_key=0a40830bfa01ed3fca505f5e01ab1a5d54e281da&type=movie&field=title&query={}'.format(
+    #             movie_search))
+    #     movie = response.json()
+    #     print(movie)
+    #     return HttpResponseRedirect(reverse('programs:detail'))
 
         # return hardcode
 
 
     def get_context_data(self, **kwargs):
-        print(self.request.body)
+        print('body', self.request.body)
         response = requests.get(
             'http://api-public.guidebox.com/v2/movies?api_key=0a40830bfa01ed3fca505f5e01ab1a5d54e281da&sources=hulu_plus,netflix&limit=250')
-        movies = response.json()
+        movielist = response.json()
+        # print(movies)
         # starting to play with paginator, but will come back after i get other more important stuff done
-        paginator = Paginator(movies, 50)
-        print(paginator.num_pages)
-        page = self.request.GET.get('page')
-        print(page)
+        # paginator = Paginator(movielist['results'], 50)
+        # print('hello', paginator)
+        # page = requests.GET.get('page')
+        # movies = paginator.get_page(page)
+        # print(movies)
         # print(movies)
         # this part is for me trying to move the ref_id to the url bar
         # results = movies['results']
@@ -47,7 +63,7 @@ class BrowseView(FormView):
         #     print(ids)
 
         ctx = {
-            'movies': movies['results'],
+            'movies': movielist['results'],
             'folders': Folder.objects.filter(user=self.request.user),
             # 'ref_id': movies.results['id']
         }
@@ -60,12 +76,17 @@ class DetailView(TemplateView):
 
     def get_movie_data(self):
         ref_id = self.kwargs.get('ref_id')
+
+        #     program = Program.objects.get(ref_id=ref_id)
+        #
+        # except Program.DoesNotExist:
+            # ref_id = self.kwargs.get('ref_id')
         response = requests.get(
             'http://api-public.guidebox.com/v2/movies/{}?api_key=0a40830bfa01ed3fca505f5e01ab1a5d54e281da'.format(
                 ref_id))
-        movie = response.json()
+        program = response.json()
         print('code', response.status_code)
-        return movie
+        return program
 
     # def get_user_info(request):
     #     folders = Folder.objects.filter(user=request.user)

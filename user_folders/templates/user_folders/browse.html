@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{#method="post" action={% url 'programs:browse' %}#}
+    {#method="post" action={% url 'programs:browse' %}#}
     <form method="post" action={% url 'programs:browse' %}>
         {% csrf_token %}
         <label for="">Search:</label>
@@ -22,6 +22,23 @@
         </div>
     {% endfor movies %}
 
+{#    <div class="pagination">#}
+{#        <span class="step-links">#}
+{#            {% if contacts.has_previous %}#}
+{#                <a href="?page=1">&laquo; first</a>#}
+{#                <a href="?page={{ contacts.previous_page_number }}">previous</a>#}
+{#            {% endif %}#}
+{##}
+{#            <span class="current">#}
+{#                Page {{ contacts.number }} of {{ contacts.paginator.num_pages }}.#}
+{#            </span>#}
+{##}
+{#            {% if contacts.has_next %}#}
+{#                <a href="?page={{ contacts.next_page_number }}">next</a>#}
+{#                <a href="?page={{ contacts.paginator.num_pages }}">last &raquo;</a>#}
+{#            {% endif %}#}
+{#        </span>#}
+{#    </div>#}
 
     <div class="modal add-modal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -32,18 +49,18 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form method="post" action="">
+                <form method="post" action="">
                     {% csrf_token %}
-                    {% for folder in folders %}
-                        <p>{{ folder.folder_title }} <label class="checkbox"><input type="checkbox"></label></p>
-                    {% endfor folders %}
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
+                    <div class="modal-body">
+                        {% for folder in folders %}
+                            <p>{{ folder.folder_title }} <label class="checkbox"><input type="checkbox"></label></p>
+                        {% endfor folders %}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

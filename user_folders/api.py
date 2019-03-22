@@ -31,8 +31,20 @@ class ProgramViewSet(ModelViewSet):
     authentication_classes = (CsrfExemptMixin,)
 
 
-class AddProgramViewSet(ModelViewSet):
-
+class UpdateFolderViewSet(UpdateAPIView):
+    authentication_classes = (CsrfExemptMixin, )
+    model = Folder
     queryset = Folder.objects.all()
-# class FolderContentViewSet(ModelViewSet):
-#
+    serializer_class = FolderSerializer
+
+    def perform_update(self, serializer):
+        print(self.request.data['dataObj']['folder_title'])
+        update = self.request.data['dataObj']['folder_title']
+        serializer.save(folder_title=update)
+
+
+class DeleteFolderViewSet(DestroyAPIView):
+    authentication_classes = (CsrfExemptMixin, )
+    model = Folder
+    queryset = Folder.objects.all()
+    serializer_class = FolderSerializer
