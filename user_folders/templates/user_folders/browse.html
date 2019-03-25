@@ -11,8 +11,11 @@
     <a href="{% url 'programs:browse' %}?q=shows" class="btn btn-primary button-width">Shows</a>
 
     {% for movie in movies %}
-        <div class="card d-inline-block" style="width: 18rem;">
-            <a href=""><img src="{{ movie.poster_240x342 }}" class="card-img-top" alt="..."></a>
+        <div class="card d-inline-block card-background" style="width: 18rem;">
+            <a href="">{% if content_type == 'movies' %}
+                <img src="{{ movie.poster_240x342 }}" class="card-img-top" alt="...">{% endif %}
+                {% if content_type == "shows" %}
+                    <img src="{{ movie.artwork_304x171 }}" class="card-img-top" alt="..."> {% endif %} </a>
             <div class="card-body">
                 <h5 class="card-title"><a href="/program/{{ movie.id }}">{{ movie.title }}</a></h5>
             </div>
@@ -21,23 +24,23 @@
         </div>
     {% endfor movies %}
 
-{#    <div class="pagination">#}
-{#        <span class="step-links">#}
-{#            {% if contacts.has_previous %}#}
-{#                <a href="?page=1">&laquo; first</a>#}
-{#                <a href="?page={{ contacts.previous_page_number }}">previous</a>#}
-{#            {% endif %}#}
-{##}
-{#            <span class="current">#}
-{#                Page {{ contacts.number }} of {{ contacts.paginator.num_pages }}.#}
-{#            </span>#}
-{##}
-{#            {% if contacts.has_next %}#}
-{#                <a href="?page={{ contacts.next_page_number }}">next</a>#}
-{#                <a href="?page={{ contacts.paginator.num_pages }}">last &raquo;</a>#}
-{#            {% endif %}#}
-{#        </span>#}
-{#    </div>#}
+    {#    <div class="pagination">#}
+    {#        <span class="step-links">#}
+    {#            {% if contacts.has_previous %}#}
+    {#                <a href="?page=1">&laquo; first</a>#}
+    {#                <a href="?page={{ contacts.previous_page_number }}">previous</a>#}
+    {#            {% endif %}#}
+    {##}
+    {#            <span class="current">#}
+    {#                Page {{ contacts.number }} of {{ contacts.paginator.num_pages }}.#}
+    {#            </span>#}
+    {##}
+    {#            {% if contacts.has_next %}#}
+    {#                <a href="?page={{ contacts.next_page_number }}">next</a>#}
+    {#                <a href="?page={{ contacts.paginator.num_pages }}">last &raquo;</a>#}
+    {#            {% endif %}#}
+    {#        </span>#}
+    {#    </div>#}
 
     <div class="modal add-modal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">

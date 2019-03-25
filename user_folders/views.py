@@ -65,6 +65,7 @@ class BrowseView(FormView):
         #     print(ids)
 
         ctx = {
+            'content_type': content_type,
             'movies': movielist['results'],
             'folders': Folder.objects.filter(user=self.request.user),
             # 'ref_id': movies.results['id']
@@ -78,6 +79,8 @@ class DetailView(TemplateView):
 
     def get_movie_data(self):
         ref_id = self.kwargs.get('ref_id')
+        content_type = self.kwargs.get('content_type')
+        print(content_type)
 
         #     program = Program.objects.get(ref_id=ref_id)
         #

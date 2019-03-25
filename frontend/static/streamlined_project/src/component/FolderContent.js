@@ -34,7 +34,7 @@ export default class FolderContent extends Component {
                             <Card style={{width: '12rem'}}>
                                 <Card.Img className='cover' variant='top' src={program.poster}/>
                                 <Card.Body>
-                                    <Card.Title><a href="../../program/browse/">{program.title}</a></Card.Title>
+                                    <Card.Title><a href={`/program/${program.ref_id}/`}>{program.title}</a></Card.Title>
                                     <Card.Text className='card-text'>
                                     </Card.Text>
                                 </Card.Body>

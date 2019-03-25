@@ -31,7 +31,6 @@ export default class FolderModal extends Component {
             obj.icon = icon;
 
             let fileReader = new FileReader();
-            // fileReader.onload = () => this.setState({icon: fileReader.result});
             fileReader.readAsDataURL(icon);
         }
         this.setState(obj);
