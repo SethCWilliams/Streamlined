@@ -53,8 +53,8 @@ export default class FolderModal extends Component {
 
     render() {
         return (
-            <div>
-                <Button variant="primary" onClick={this.handleShow}>
+            <div className="text-center">
+                <Button className="text-center" variant="primary" onClick={this.handleShow}>
                     Add
                 </Button>
 
