@@ -16,6 +16,14 @@
           <p class="lead text-center"><a href="{% url 'programs:browse' %}?q=shows" class=" btn btn-primary button-width">Shows</a></p>
       </div>
     </div>
+    <div>
+        <form class="row" method="post" action="{% url 'programs:browse' %}">
+            {% csrf_token %}
+            <h5 class="col-md-1"><label for="">Search:</label></h5>
+            <input class="col-md-2" type="text" name="title">
+            <button type="submit" class="col-md-1 btn btn-danger">Submit</button>
+        </form>
+    </div>
     {% for movie in movies %}
         <div class="card d-inline-block card-background" style="width: 18rem;">
             <a href="">{% if content_type == 'movies' %}
