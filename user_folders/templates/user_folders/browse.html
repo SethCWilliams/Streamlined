@@ -1,15 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <form method="post" action="{% url 'programs:browse' %}">
-        {% csrf_token %}
-        <label for="">Search:</label>
-        <input type="text" name="title">
-        <button type="submit" class="btn btn-danger">Submit</button>
-    </form>
-    <a href="{% url 'programs:browse' %}?q=movies" class=" btn btn-primary button-width">Movies</a>
-    <a href="{% url 'programs:browse' %}?q=shows" class="btn btn-primary button-width">Shows</a>
-
+    <div class="jumbotron text-center jumbotron-fluid">
+      <div class="container">
+        <h1 class="static display-4">Searching Made Simple</h1>
+        <p class="lead"><form class="col" method="post" action="{% url 'programs:browse' %}">
+                {% csrf_token %}
+                <h5><label for="">Search:</label></h5>
+                <input type="text" name="title">
+                <button type="submit" class="btn btn-danger">Submit</button>
+            </form></p>
+          <h4>-or-</h4>
+          <h5>Browse:</h5>
+          <p class="lead text-center"><a href="{% url 'programs:browse' %}?q=movies" class=" btn btn-primary button-width">Movies</a></p>
+          <p class="lead text-center"><a href="{% url 'programs:browse' %}?q=shows" class=" btn btn-primary button-width">Shows</a></p>
+      </div>
+    </div>
     {% for movie in movies %}
         <div class="card d-inline-block card-background" style="width: 18rem;">
             <a href="">{% if content_type == 'movies' %}
@@ -22,6 +28,7 @@
             <button type="button" data-toggle="modal" data-target=".add-modal" class="btn btn-primary">Add Movie
             </button>
         </div>
+
     {% endfor movies %}
 
     {#    <div class="pagination">#}

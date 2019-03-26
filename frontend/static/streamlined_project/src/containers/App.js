@@ -103,9 +103,9 @@ class App extends Component {
     render() {
         console.log('edit', this.state.isEditing);
         return (
-            <div className='App'>
+            <div>
                 <Card style={{width: '12rem'}}>
-                    <Card.Img className='cover' variant='top' src={plus}/>
+                    <Card.Img className='background-color' variant='top' src={plus}/>
                     <Card.Body>
                         <Card.Title>Add A List</Card.Title>
                         <Card.Text className='card-text'>
@@ -119,6 +119,7 @@ class App extends Component {
 
                     <NewFolder newfolders={this.state.folders} edit={this.doEdit}/>
                 )}
+
             </div>
         );
     }

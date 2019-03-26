@@ -8,6 +8,11 @@
   pointer-events: none;
 }
 
+.background-color {
+  background-image: url("../plusback.png");
+  background-size: cover;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -23,4 +28,9 @@
 
 .card-text {
   font-size: small;
+}
+
+.forty-nine {
+  width: 49%;
+  display: inline-block;
 }

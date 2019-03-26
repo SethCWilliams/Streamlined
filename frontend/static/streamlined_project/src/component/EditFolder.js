@@ -49,7 +49,7 @@ export default class EditFolder extends Component {
             <form id="uploadForm" onSubmit={e => {
                 e.preventDefault();
             }}>
-                <h1 id="editPostText">EDIT POST</h1>
+                <h2>Edit Folder</h2>
                 <hr/>
                 <img src={this.state.icon} alt=""/>
                 <input

@@ -24,7 +24,7 @@ export default class FolderContent extends Component {
         // }
         return (
             <div className='App'>
-                <h1>Content</h1>
+
                 {this.props.foldercontent.folder_title}
                 {programs &&
                 programs.map((program) => {

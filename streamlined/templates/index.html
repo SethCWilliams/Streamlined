@@ -3,23 +3,23 @@
 {% block content %}
 
     <div class="row">
-    <div class=" hero col">
-        <div class="bottom-border">
-        <h1>Less Browsing.</h1>
-        <h1>More Watching.</h1>
-        <p>Browse movies and shows from multiple streaming services you already subscribe to, and organize the movies and shows you want to watch,
-        so you spend less of your movie night picking what to watch, and more time watching.</p>
+        <div class=" hero col">
+            <div class="bottom-border">
+            <h1>Less Browsing.</h1>
+            <h1>More Watching.</h1>
+            <p>Browse movies and shows from multiple streaming services you already subscribe to, and organize the movies and shows you want to watch,
+            so you spend less of your movie night picking what to watch, and more time watching.</p>
 
-        <div class="text-center row">
-            <div class="col"><a href="#" class="btn btn-primary animated-button thar-four">Signup</a></div>
-            <p class="col">-or-</p>
-            <div class="col"><a href="#" class="btn btn-sm animated-button thar-four">How It Works</a></div>
+            <div class="text-center row">
+                <div class="col"><a href="{% url "users:signup" %}" class="btn btn-primary animated-button thar-four">Signup</a></div>
+                <p class="col">-or-</p>
+                <div class="col"><a href="#info" class="btn btn-sm animated-button thar-four">How It Works</a></div>
+            </div>
+            </div>
         </div>
+        <div class="col hero border-bottom">
+            <img class="family" src="{% static "media/family.jpg" %}" alt="">
         </div>
-    </div>
-    <div class="col hero border-bottom">
-        <img class="family" src="{% static "media/family.jpg" %}" alt="">
-    </div>
     </div>
 
 {% endblock content %}

@@ -27,7 +27,7 @@ export default class NewFolder extends Component {
         let folders = this.props.newfolders.map((folder) => {
             console.log('newfolder', folder);
             return(
-                <div key={folder.id} className='App'>
+                <div className='d-inline-block' key={folder.id}>
                     <Card style={{width: '12rem'}}>
                          <Card.Img className='cover' variant='top' src={folder.icon}/>
                          <Card.Body>
@@ -44,8 +44,12 @@ export default class NewFolder extends Component {
          });
         return(
             <div>
-            {folders}
+                <div className="forty-nine">
+                    {folders}
+                </div>
+                <div className="forty-nine">
             <FolderContent foldercontent={this.state.folder}/>
+                </div>
             </div>
         )
     }
