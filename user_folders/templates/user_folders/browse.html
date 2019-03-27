@@ -6,10 +6,10 @@
         <form method="post" action="{% url 'programs:browse' %}?=q=search">
             {% csrf_token %}
             {% if content_type == "movies" %}
-                <input type="text" placeholder="Search Movie Titles" name="movies">
+                <input type="text" placeholder="Search Movie Titles" name="query">
             {% endif %}
             {% if content_type == "shows" %}
-                <input type="text" placeholder="Search Show Titles" name="shows">
+                <input type="text" placeholder="Search Show Titles" name="query">
             {% endif %}
             <button type="submit" class="btn btn-danger">Submit</button>
         </form>
