@@ -3,28 +3,31 @@
 {% block content %}
     <div class="row">
         <p class="lead">
-        <form method="post" action="{% url 'programs:browse' %}?=q=search">
+        <form method="post" action="{% url 'programs:browse' %}?q=search">
             {% csrf_token %}
             {% if content_type == "movies" %}
                 <input type="text" placeholder="Search Movie Titles" name="query">
-            {% endif %}
-            {% if content_type == "shows" %}
+            {% elif content_type == "shows" %}
                 <input type="text" placeholder="Search Show Titles" name="query">
+            {% else %}
+                <input type="text" placeholder="Search Movie Titles" name="query">
             {% endif %}
             <button type="submit" class="btn btn-danger">Submit</button>
         </form>
         </p>
         <h4>-or-</h4>
         <h5>Browse:</h5>
-        <p class="lead text-center"><a href="{% url 'programs:browse' %}?q=movies"
-                                       class=" btn btn-primary button-width">Movies</a></p>
-        <p class="lead text-center"><a href="{% url 'programs:browse' %}?q=shows" class=" btn btn-primary button-width">Shows</a>
+        <p class="lead text-center">
+            <a href="{% url 'programs:browse' %}?q=movies" class=" btn btn-primary button-width">Movies</a>
+        </p>
+        <p class="lead text-center">
+            <a href="{% url 'programs:browse' %}?q=shows" class=" btn btn-primary button-width">Shows</a>
         </p>
     </div>
     </div>
     {% for movie in movies %}
         <div class="card d-inline-block card-background" style="width: 18rem;">
-            <a href="">{% if content_type == 'movies' %}
+            <a href="">{% if content_type == 'movies' or 'search' %}
                 <img src="{{ movie.poster_240x342 }}" class="card-img-top" alt="...">{% endif %}
                 {% if content_type == "shows" %}
                     <img src="{{ movie.artwork_304x171 }}" class="card-img-top" alt="..."> {% endif %} </a>

@@ -30,7 +30,8 @@ class BrowseView(FormView):
         return program
 
     def get_context_data(self, **kwargs):
-        print('body', self.request.body)
+        query = self.request.GET.get('query')
+        print('query', query)
         # if q exists, it will return the value of q, if it doesn't exit, it returns None'
         content_type = self.request.GET.get('q', default='movies')
         if content_type == 'search':
