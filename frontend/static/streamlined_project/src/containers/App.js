@@ -37,8 +37,6 @@ class App extends Component {
         let folders = [...this.state.folders];
         folders[index] = myObj;
 
-        // this.setState({folders, isEditing: false});
-
 
         fetch(`/api/folder/${this.state.isEditing.id}/`, {
             method: 'PATCH',

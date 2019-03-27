@@ -1,4 +1,6 @@
-# from django import forms
-#
-# class BrowseForm(forms.Form):
-#     genre = forms.ChoiceField
+from django import forms
+
+
+class SearchForm(forms.Form):
+    query = forms.CharField()
+    type = forms.CharField()

@@ -21,12 +21,6 @@
         <p class="lead text-center"><a href="{% url 'programs:browse' %}?q=shows" class=" btn btn-primary button-width">Shows</a>
         </p>
     </div>
-    {#        <form class="row" method="post" action="{% url 'programs:browse' %}">#}
-    {#            {% csrf_token %}#}
-    {#            <h5 class="col-md-1"><label for="">Search:</label></h5>#}
-    {#            <input class="col-md-2" type="text" name="title">#}
-    {#            <button type="submit" class="col-md-1 btn btn-danger">Submit</button>#}
-    {#        </form>#}
     </div>
     {% for movie in movies %}
         <div class="card d-inline-block card-background" style="width: 18rem;">
@@ -45,7 +39,7 @@
         </div>
 
     {% endfor movies %}
-
+    {#    Hopefully I'll get to the pagination part#}
     {#    <div class="pagination">#}
     {#        <span class="step-links">#}
     {#            {% if contacts.has_previous %}#}
@@ -77,9 +71,13 @@
                     {% csrf_token %}
                     <div class="modal-body">
                         {% for folder in folders %}
-                            <p>{{ folder.folder_title }} <label class="checkbox"><input name="folder"
-                                                                                        value="{{ folder.pk }}"
-                                                                                        type="checkbox"></label></p>
+                            <div>{{ folder.folder_title }}
+                                <label class="checkbox">
+                                    <input name="folder"
+                                           value="{{ folder.pk }}"
+                                           type="checkbox">
+                                </label>
+                            </div>
                         {% endfor folders %}
                     </div>
                     <div class="modal-footer">
