@@ -83,7 +83,14 @@ class App extends Component {
         fetch(`/api/folder/`, {
             method: 'POST', body: formData
         }).then(response => response.json())
-            .then(json => console.log('success!', JSON.stringify(json)))
+            .then((json) => {
+                console.log('success!', JSON.stringify(json));
+                let folder = json;
+                let folders = [...this.state.folders];
+                folders.unshift(folder);
+
+                this.setState({folders});
+            })
             .catch(error => console.log('ERROR!', error))
     }
 
@@ -99,23 +106,29 @@ class App extends Component {
         }).then(json => this.setState({folders: json}))
             .catch(error => console.log(error));
     }
+    // This doesn't work. it can't return a boolean value. what should i do instead?
+    // cancelEdit() {
+    //     this.setState({isEditing: false})
+    // }
 
     render() {
         console.log('edit', this.state.isEditing);
         return (
-            <div>
-                <Card style={{width: '12rem'}}>
-                    <Card.Img className='background-color' variant='top' src={plus}/>
+            <div className="row">
+                <Card className="add-card-params" style={{width: '12rem'}}>
+                    <Card.Img className='image-params' variant='top' src={plus}/>
                     <Card.Body>
                         <Card.Title>Add A List</Card.Title>
                         <Card.Text className='card-text'>
                         </Card.Text>
+                        <div className="surrounding">
                         <FolderModal addFolder={this.addFolder}/>
+                        </div>
                     </Card.Body>
                 </Card>
                 {this.state.isEditing ? (
                     <EditFolder folder={this.state.isEditing} update={this.updateFolder}
-                                delete={this.deleteFolder}/>) : (
+                                delete={this.deleteFolder} cancel={this.cancelEdit}/>) : (
 
                     <NewFolder newfolders={this.state.folders} edit={this.doEdit}/>
                 )}

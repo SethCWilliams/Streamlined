@@ -1,28 +1,28 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="jumbotron text-center jumbotron-fluid">
-      <div class="container">
-        <h1 class="static display-4">Searching Made Simple</h1>
-        <p class="lead"><form class="col" method="post" action="{% url 'programs:browse' %}">
+    <div class="row">
+        <p class="lead"><form method="post" action="{% url 'programs:browse' %}?q=search">
                 {% csrf_token %}
-                <h5><label for="">Search:</label></h5>
-                <input type="text" name="title">
+            {% if content_type == "movies" %}
+                <input type="text" placeholder="Search Movie Titles" name="movies">
+            {% endif %}
+            {% if content_type == "shows" %}
+                <input type="text" placeholder="Search Show Titles" name="title">
+            {% endif %}
                 <button type="submit" class="btn btn-danger">Submit</button>
             </form></p>
           <h4>-or-</h4>
           <h5>Browse:</h5>
           <p class="lead text-center"><a href="{% url 'programs:browse' %}?q=movies" class=" btn btn-primary button-width">Movies</a></p>
           <p class="lead text-center"><a href="{% url 'programs:browse' %}?q=shows" class=" btn btn-primary button-width">Shows</a></p>
-      </div>
     </div>
-    <div>
-        <form class="row" method="post" action="{% url 'programs:browse' %}">
-            {% csrf_token %}
-            <h5 class="col-md-1"><label for="">Search:</label></h5>
-            <input class="col-md-2" type="text" name="title">
-            <button type="submit" class="col-md-1 btn btn-danger">Submit</button>
-        </form>
+{#        <form class="row" method="post" action="{% url 'programs:browse' %}">#}
+{#            {% csrf_token %}#}
+{#            <h5 class="col-md-1"><label for="">Search:</label></h5>#}
+{#            <input class="col-md-2" type="text" name="title">#}
+{#            <button type="submit" class="col-md-1 btn btn-danger">Submit</button>#}
+{#        </form>#}
     </div>
     {% for movie in movies %}
         <div class="card d-inline-block card-background" style="width: 18rem;">
@@ -31,10 +31,12 @@
                 {% if content_type == "shows" %}
                     <img src="{{ movie.artwork_304x171 }}" class="card-img-top" alt="..."> {% endif %} </a>
             <div class="card-body">
-                <h5 class="card-title"><a href="/program/{{ movie.id }}">{{ movie.title }}</a></h5>
+                <h5 class="text-center card-title"><a href="/program/{{ movie.id }}">{{ movie.title }}</a></h5>
             </div>
-            <button type="button" data-toggle="modal" data-target=".add-modal" class="btn btn-primary">Add Movie
+            <div class="text-center">
+            <button type="button" data-toggle="modal" data-target=".add-modal" class="text-center btn btn-primary">Add Movie
             </button>
+            </div>
         </div>
 
     {% endfor movies %}
@@ -70,7 +72,7 @@
                     {% csrf_token %}
                     <div class="modal-body">
                         {% for folder in folders %}
-                            <p>{{ folder.folder_title }} <label class="checkbox"><input type="checkbox"></label></p>
+                            <p>{{ folder.folder_title }} <label class="checkbox"><input name="folder" value="{{ folder.pk }}" type="checkbox"></label></p>
                         {% endfor folders %}
                     </div>
                     <div class="modal-footer">

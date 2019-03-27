@@ -20,6 +20,7 @@ html, body {
 
 .card-body {
     margin: auto;
+	max-height: 75px;
 }
 
 /*.button-width {*/
@@ -145,6 +146,7 @@ a.animated-button.thar-four:before {
 
 .bottom-border {
 	border-bottom: 1px solid #4484CE;
+	padding-top: 10%;
 }
 
 .hero {
@@ -157,7 +159,7 @@ a.animated-button.thar-four:before {
 }
 
 .card-background {
-	background-color: #4484ce;
+	background-color: #f8f8f8;
 	margin: 1%;
 }
 
@@ -179,10 +181,37 @@ a.animated-button.thar-four:before {
 	color: #4484CE;
 }
 
-.jumbotron {
-	border-radius: 25px;
-	font-family: Cormorant;
-	padding: 2%;
-	background-image: linear-gradient(#FFFFFF, #9d9d9d);
+.card-params {
+	max-height: 100%;
+	text-align: center;
+	width: 20%;
+	margin-right: 1%;
 }
 
+.add-card-params {
+	height: 340px;
+	text-align: center;
+	margin-right: 1%;
+	margin-left: 1%;
+}
+
+.image-params {
+	/*height: 210px;*/
+	height: 190px;
+}
+
+.pad-it {
+	padding-top: 1%;
+}
+
+.add-button {
+	margin-bottom: 20px;
+}
+
+#uploadForm {
+	max-width: 100%;
+}
+
+/*.margin-right {*/
+	/*margin-right: 1%;*/
+/*}*/

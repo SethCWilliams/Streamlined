@@ -9,7 +9,7 @@
 }
 
 .background-color {
-  background-image: url("../plusback.png");
+  /*background-image: url("../../../../../staticfiles/media/plusback.png");*/
   background-size: cover;
 }
 

@@ -11,19 +11,21 @@ from django.core.paginator import Paginator
 class BrowseView(FormView):
     template_name = 'user_folders/browse.html'
     # Trying to get my add to folder from browse function to work
-    # def get_movie_data(self):
-    #     ref_id = self.kwargs.get('movie.id')
-    #
-    #     #     program = Program.objects.get(ref_id=ref_id)
-    #     #
-    #     # except Program.DoesNotExist:
-    #         # ref_id = self.kwargs.get('ref_id')
-    #     response = requests.get(
-    #         'http://api-public.guidebox.com/v2/movies/{}?api_key=0a40830bfa01ed3fca505f5e01ab1a5d54e281da'.format(
-    #             ref_id))
-    #     program = response.json()
-    #     print('code', response.status_code)
-    #     return program
+
+    def get_movie_data(self):
+        ref_id = self.kwargs.get('movie.id')
+        print(ref_id)
+
+        #     program = Program.objects.get(ref_id=ref_id)
+        #
+        # except Program.DoesNotExist:
+            # ref_id = self.kwargs.get('ref_id')
+        response = requests.get(
+            'http://api-public.guidebox.com/v2/movies/{}?api_key=0a40830bfa01ed3fca505f5e01ab1a5d54e281da'.format(
+                ref_id))
+        program = response.json()
+        print('code', response.status_code)
+        return program
 
 
     # def get_search_data(self, **kwargs):
@@ -45,10 +47,12 @@ class BrowseView(FormView):
         print('body', self.request.body)
         # if q exists, it will return the value of q, if it doesn't exit, it returns None'
         content_type = self.request.GET.get('q', default='movies')
-        # .format(content_type
+        # similar setup will be needed for search to work
+        # & field = title & type = movie & query = terminator
         response = requests.get(
-            'http://api-public.guidebox.com/v2/{}?api_key=0a40830bfa01ed3fca505f5e01ab1a5d54e281da&sources=hulu_plus,netflix&limit=250'.format(content_type))
+            'http://api-public.guidebox.com/v2/{}?api_key=0a40830bfa01ed3fca505f5e01ab1a5d54e281da&sources=amazon_prime,hulu_plus,netflix&limit=250'.format(content_type))
         movielist = response.json()
+        print(movielist)
         # starting to play with paginator, but will come back after i get other more important stuff done
         # paginator = Paginator(movielist['results'], 50)
         # print('hello', paginator)
