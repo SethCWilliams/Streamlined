@@ -35,9 +35,11 @@ export default class NewFolder extends Component {
                              <Card.Text className='card-text'>
                              </Card.Text>
                          </Card.Body>
+                        <div className="text-center">
                         <Button className="stacked-buttons" onClick={() => {this.props.edit(folder)}}>Edit Folder</Button>
 
                         <Button className="stacked-buttons" onClick={() => {this.showPrograms(folder)}}>Folder View</Button>
+                        </div>
                      </Card>
                  </div>
              )

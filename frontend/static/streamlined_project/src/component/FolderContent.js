@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import '../containers/App.css';
 import Card from 'react-bootstrap/Card';
+import Button from "react-bootstrap/Button";
 // import Button from "./component/NewFolder";
 // import plus from "./plus.png";
 // import FolderModal from "./containers/App";
@@ -9,8 +10,12 @@ import Card from 'react-bootstrap/Card';
 export default class FolderContent extends Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+
+        }
     }
+
+
 
 
     render() {
@@ -23,19 +28,19 @@ export default class FolderContent extends Component {
 
         // }
         return (
-            <div className='App'>
-
+            <div>
                 {this.props.foldercontent.folder_title}
                 {programs &&
                 programs.map((program) => {
                     console.log(program);
                     return (
-                        <div className='App'>
-                            <Card style={{width: '12rem'}}>
+                        <div className="content-card">
+                            <Card onHover style={{width: '12rem'}}>
                                 <Card.Img className='cover' variant='top' src={program.poster}/>
-                                <Card.Body>
+                                <Card.Body className="content-card">
                                     <Card.Title><a href={`/program/${program.ref_id}/`}>{program.title}</a></Card.Title>
                                     <Card.Text className='card-text'>
+                                        <Button>Remove {program.title}</Button>
                                     </Card.Text>
                                 </Card.Body>
                             </Card>

@@ -23,6 +23,7 @@ class App extends Component {
         this.updateFolder = this.updateFolder.bind(this);
         this.deleteFolder = this.deleteFolder.bind(this);
         this.cancelEdit = this.cancelEdit.bind(this);
+        this.removeProgram = this.removeProgram.bind(this);
     }
 
     doEdit(folder) {
@@ -71,6 +72,10 @@ class App extends Component {
         this.setState({isEditing: false})
     }
 
+    removeProgram(){
+
+    }
+
     addFolder(dataObject) {
         let folder_title = dataObject.folder_title;
         let icon = dataObject.icon;
@@ -112,6 +117,7 @@ class App extends Component {
 
     render() {
         console.log('edit', this.state.isEditing);
+        console.log('look here', this.state.folders);
         return (
             <div className="row">
                 <Card className="add-card-params" style={{width: '12rem'}}>

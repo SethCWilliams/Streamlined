@@ -2,35 +2,36 @@
 
 {% block content %}
     <div class="row">
-        <p class="lead">
-        <form method="post" action="{% url 'programs:browse' %}?q=search">
+        <form class="" method="post" action="{% url 'programs:browse' %}?q=search">
             {% csrf_token %}
             {% if content_type == "movies" %}
-                <input type="text" placeholder="Search Movie Titles" name="query">
+                <input class="" type="text" placeholder="Search Movie Titles" name="query">
             {% elif content_type == "shows" %}
-                <input type="text" placeholder="Search Show Titles" name="query">
+                <input class="" type="text" placeholder="Search Show Titles" name="query">
             {% else %}
-                <input type="text" placeholder="Search Movie Titles" name="query">
+                <input class="" type="text" placeholder="Search Movie Titles" name="query">
             {% endif %}
             <button type="submit" class="btn btn-danger">Submit</button>
         </form>
-        </p>
-        <h4>-or-</h4>
-        <h5>Browse:</h5>
-        <p class="lead text-center">
-            <a href="{% url 'programs:browse' %}?q=movies" class=" btn btn-primary button-width">Movies</a>
-        </p>
-        <p class="lead text-center">
+        <h4 class="">-or-</h4>
+        <h4 class="">Browse:</h4>
+            <a href="{% url 'programs:browse' %}?q=movies" class=" btn btn-primary button-width ">Movies</a>
             <a href="{% url 'programs:browse' %}?q=shows" class=" btn btn-primary button-width">Shows</a>
-        </p>
     </div>
-    </div>
+    <div class="text-center">
     {% for movie in movies %}
         <div class="card d-inline-block card-background" style="width: 18rem;">
-            <a href="">{% if content_type == 'movies' or 'search' %}
-                <img src="{{ movie.poster_240x342 }}" class="card-img-top" alt="...">{% endif %}
-                {% if content_type == "shows" %}
-                    <img src="{{ movie.artwork_304x171 }}" class="card-img-top" alt="..."> {% endif %} </a>
+            <a href="/program/{{ movie.id }}">
+                {% if content_type == 'movies' %}
+                    <img src="{{ movie.poster_240x342 }}" class="card-img-top" alt="...">
+                {% endif %}
+                {% if content_type == 'shows' %}
+                    <img src="{{ movie.artwork_304x171 }}" class="card-img-top" alt="...">
+                {% endif %}
+                {% if content_type == 'search' %}
+                    <img src="{{ movie.poster_240x342 }}" class="card-img-top" alt="...">
+                {% endif %}
+            </a>
             <div class="card-body">
                 <h5 class="text-center card-title"><a href="/program/{{ movie.id }}">{{ movie.title }}</a></h5>
             </div>
@@ -40,8 +41,8 @@
                 </button>
             </div>
         </div>
-
     {% endfor movies %}
+    </div>
     {#    Hopefully I'll get to the pagination part#}
     {#    <div class="pagination">#}
     {#        <span class="step-links">#}

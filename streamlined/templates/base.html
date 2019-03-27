@@ -17,7 +17,7 @@
 {#            <li class="col"><a href="#" class="btn btn-sm animated-button thar-four">How-to</a></li>#}
 {#            <li class="col"><a href="#" class="btn btn-sm animated-button thar-four">Browse</a></li>#}
             {% if user.is_authenticated %}
-            <li class="col-md-4"><a href="/"><img class="logo" src="{% static "media/Streamlined.png" %}"></a></li>
+            <li class="col-sm-0 col-md-2"><a href="/"><img class="logo" src="{% static "media/Streamlined.png" %}"></a></li>
             <li class="col-md-2"><a href="{% url 'frontend:index' %}" class="btn btn-sm animated-button thar-four">My Folders</a></li>
             <li class="col-md-2"><a href="{% url 'programs:browse' %}" class="btn btn-sm animated-button thar-four">Browse</a></li>
             <li class="col-md-2"><a href="{% url 'users:logout' %}" class="btn btn-sm animated-button thar-four">Logout</a></li>
@@ -31,8 +31,10 @@
 
         </ul>
     </div>
+
     {% block content %}
     {% endblock content %}
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>
