@@ -4,12 +4,14 @@ from user_folders.models import Folder, Program
 from django.views.generic import TemplateView, FormView
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from .forms import SearchForm
 from django.core.paginator import Paginator
 # from justwatch import JustWatch
 
 
 class BrowseView(FormView):
     template_name = 'user_folders/browse.html'
+    form_class = SearchForm
     # Trying to get my add to folder from browse function to work
 
     def get_movie_data(self):
