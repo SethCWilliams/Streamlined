@@ -11,7 +11,7 @@ export default class NewFolder extends Component {
         super(props);
         this.state = {
             folder: []
-        }
+        };
         this.handleShow = this.handleShow.bind(this);
     }
 

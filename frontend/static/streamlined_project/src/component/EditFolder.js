@@ -17,6 +17,7 @@ export default class EditFolder extends Component {
         this.handleInput = this.handleInput.bind(this);
         this.handleUpdate = this.handleUpdate.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
+        this.handleCancel = this.handleCancel.bind(this);
     }
 
     handleInput(event) {
@@ -38,9 +39,9 @@ export default class EditFolder extends Component {
         // console.log('picture update', this.state.icon);
     }
 
-    // handleCancel() {
-    //     this.props.cancel();
-    // }
+    handleCancel() {
+        this.props.cancel();
+    }
 
     handleDelete(e) {
         this.props.delete();
@@ -66,7 +67,7 @@ export default class EditFolder extends Component {
                            name='folder_title'
                            onChange={this.handleInput}/>
                     {/*onClick{...this.handleCancel} */}
-                    <button className="btn btn-outline-info my-2 my-sm-0">Cancel</button>
+                    <button onClick={this.handleCancel} className="btn btn-outline-info my-2 my-sm-0">Cancel</button>
                     <button id="submitButton" className="btn btn-outline-info my-2 my-sm-0" onClick={this.handleUpdate}
                             value="submit">Save
                     </button>

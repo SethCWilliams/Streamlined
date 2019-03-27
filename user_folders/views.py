@@ -27,32 +27,19 @@ class BrowseView(FormView):
         print('code', response.status_code)
         return program
 
-
-    # def get_search_data(self, **kwargs):
-    #     if self.request.method == 'POST':
-    #         print('i am firing')
-    #     movie_search = self.request.form('title')
-    #     print(movie_search)
-    #     response = requests.get(
-    #         'http://api-public.guidebox.com/v2/search/?api_key=0a40830bfa01ed3fca505f5e01ab1a5d54e281da&type=movie&field=title&query={}'.format(
-    #             movie_search))
-    #     movie = response.json()
-    #     print(movie)
-    #     return HttpResponseRedirect(reverse('programs:detail'))
-
-        # return hardcode
-
-
     def get_context_data(self, **kwargs):
         print('body', self.request.body)
         # if q exists, it will return the value of q, if it doesn't exit, it returns None'
         content_type = self.request.GET.get('q', default='movies')
+        if content_type == 'search':
+            print('holla')
+        print('here i am', content_type)
         # similar setup will be needed for search to work
         # & field = title & type = movie & query = terminator
         response = requests.get(
-            'http://api-public.guidebox.com/v2/{}?api_key=0a40830bfa01ed3fca505f5e01ab1a5d54e281da&sources=amazon_prime,hulu_plus,netflix&limit=250'.format(content_type))
+            'http://api-public.guidebox.com/v2/{}?api_key=0a40830bfa01ed3fca505f5e01ab1a5d54e281da&field=title&type=movie&query=terminator&sources=amazon_prime,hulu_plus,netflix&limit=250'.format(content_type))
         movielist = response.json()
-        print(movielist)
+        # print(movielist)
         # starting to play with paginator, but will come back after i get other more important stuff done
         # paginator = Paginator(movielist['results'], 50)
         # print('hello', paginator)

@@ -22,6 +22,7 @@ class App extends Component {
         this.doEdit = this.doEdit.bind(this);
         this.updateFolder = this.updateFolder.bind(this);
         this.deleteFolder = this.deleteFolder.bind(this);
+        this.cancelEdit = this.cancelEdit.bind(this);
     }
 
     doEdit(folder) {
@@ -107,9 +108,9 @@ class App extends Component {
             .catch(error => console.log(error));
     }
     // This doesn't work. it can't return a boolean value. what should i do instead?
-    // cancelEdit() {
-    //     this.setState({isEditing: false})
-    // }
+    cancelEdit() {
+        this.setState({isEditing: false})
+    }
 
     render() {
         console.log('edit', this.state.isEditing);
