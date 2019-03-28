@@ -37,6 +37,9 @@
                         {% for source in web_source %}
                             <h3 class="bottom-border">Watch on {{ source.display_name }}: <a href="{{ source.link }}"><span class="point">{{ title }}</span></a></h3>
                         {% endfor web_source %}
+                        <div class="column">
+                            <button type="button" data-toggle="modal" data-target=".add-modal" class="btn btn-primary">Add Movie</button>
+                        </div>
                         </div>
                     </div>
 
