@@ -3,21 +3,36 @@
 
 {% block content %}
     <div class="scrolling-wrapper">
-        <div class="column row">
-            <div class="col-md-4">
-                <h2 class="row" id={{ id }}>{{ title }}</h2>
-                <img class="row thumbnail" src={{ poster }}>
-
+{#        <div class="column row">#}
+{#            <div class="col-md-4">#}
+{#                <h2 class="row" id={{ id }}>{{ title }}</h2>#}
+{#                <img class="row thumbnail" src={{ poster }}>#}
+{##}
+{#            </div>#}
+{#            <div class="column col-md-8 padded">#}
+{#                <h5 class="row"><span class="point">Release Year: </span>  {{ release_year }}</h5>#}
+{#                <p class="row"><span class="point">Rating: </span>{{ rating }}</p>#}
+{#                <p class="row"><span class="point">Description: </span>{{ overview }}</p>#}
+{#                {% for source in web_source %}#}
+{#                    <p class="font-weight-bold row">Watch on {{ source.display_name }}: <a href="{{ source.link }}">{{ title }}</a></p>#}
+{#                {% endfor web_source %}#}
+{#                <button type="button" data-toggle="modal" data-target=".add-modal" class="btn btn-primary">Add Movie#}
+{#                </button>#}
+{#            </div>#}
+{#        </div>#}
+        <div class="ui grid">
+            <div class="row">
+                <div class="four wide column">
+                    <div class="row">
+                    <h2 class="column" id="{{ id }}">{{ title }}</h2>
+                    <h6 class="column">{{ rating }}</h6>
+                    </div>
+                    <img class="row" src={{ poster }} alt="">
+                </div>
+                <div class="seven wide column"></div>
             </div>
-            <div class="column col-md-8 padded">
-                <h5 class="row"><span class="point">Release Year: </span>  {{ release_year }}</h5>
-                <p class="row"><span class="point">Rating: </span>{{ rating }}</p>
-                <p class="row"><span class="point">Description: </span>{{ overview }}</p>
-                {% for source in web_source %}
-                    <p class="font-weight-bold row">Watch on {{ source.display_name }}: <a href="{{ source.link }}">{{ title }}</a></p>
-                {% endfor web_source %}
-                <button type="button" data-toggle="modal" data-target=".add-modal" class="btn btn-primary">Add Movie
-                </button>
+            <div class="row">
+                <div class="ten wide column"><h1></h1></div>
             </div>
         </div>
     </div>

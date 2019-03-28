@@ -1,47 +1,80 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="row">
-        <form class="" method="post" action="{% url 'programs:browse' %}?q=search">
-            {% csrf_token %}
-            {% if content_type == "movies" %}
-                <input class="" type="text" placeholder="Search Movie Titles" name="query">
-            {% elif content_type == "shows" %}
-                <input class="" type="text" placeholder="Search Show Titles" name="query">
-            {% else %}
-                <input class="" type="text" placeholder="Search Movie Titles" name="query">
-            {% endif %}
-            <button type="submit" class="btn btn-danger">Submit</button>
-        </form>
-        <h4 class="">-or-</h4>
-        <h4 class="">Browse:</h4>
-            <a href="{% url 'programs:browse' %}?q=movies" class=" btn btn-primary button-width ">Movies</a>
-            <a href="{% url 'programs:browse' %}?q=shows" class=" btn btn-primary button-width">Shows</a>
-    </div>
-    <div class="text-center">
-    {% for movie in movies %}
-        <div class="card d-inline-block card-background" style="width: 18rem;">
-            <a href="/program/{{ movie.id }}">
-                {% if content_type == 'movies' %}
-                    <img src="{{ movie.poster_240x342 }}" class="card-img-top" alt="...">
-                {% endif %}
-                {% if content_type == 'shows' %}
-                    <img src="{{ movie.artwork_304x171 }}" class="card-img-top" alt="...">
-                {% endif %}
-                {% if content_type == 'search' %}
-                    <img src="{{ movie.poster_240x342 }}" class="card-img-top" alt="...">
-                {% endif %}
-            </a>
-            <div class="card-body">
-                <h5 class="text-center card-title"><a href="/program/{{ movie.id }}">{{ movie.title }}</a></h5>
+{#    <div class="container-fluid">#}
+{#        <div class="row justify-content-center">#}
+{#            <form class="col-md-5" method="post" action="{% url 'programs:browse' %}?q=search">#}
+{#                {% csrf_token %}#}
+{#                {% if content_type == "movies" %}#}
+{#                    <input class="" type="text" placeholder="Search Movie Titles" name="query">#}
+{#                {% elif content_type == "shows" %}#}
+{#                    <input class="" type="text" placeholder="Search Show Titles" name="query">#}
+{#                {% else %}#}
+{#                    <input class="" type="text" placeholder="Search Movie Titles" name="query">#}
+{#                {% endif %}#}
+{#                <button type="submit" class="btn btn-danger">Submit</button>#}
+{#            </form>#}
+{#            <h4 class="col-md-2">-or-</h4>#}
+{#            <div class="col-md-5">#}
+{#            <h4 class="d-inline-block">Browse:</h4>#}
+{#                <a href="{% url 'programs:browse' %}?q=movies" class="d-inline-block btn btn-primary button-width ">Movies</a>#}
+{#                <a href="{% url 'programs:browse' %}?q=shows" class="d-inline-block btn btn-primary button-width">Shows</a>#}
+{#            </div>#}
+{#        </div>#}
+    <div>
+        <div class="text-center">
+            <h4 class="">Search:</h4>
+            <form class="" method="post" action="{% url 'programs:browse' %}?q=search">
+                {% csrf_token %}
+                <div class="ui icon input">
+                    {% if content_type == 'movies' %}
+                        <input type="text" placeholder="Search Movie Titles" name="query">
+                        <i class="circular search link icon"></i>
+                    {% elif content_type == 'shows' %}
+                        <input type="text" placeholder="Search Show Titles" name="query">
+                        <i class="circular search link icon"></i>
+                    {% else %}
+                        <input class="link icon" type="text" placeholder="Search Movie Titles" name="query">
+                        <i class="circular search link icon"></i>
+                    {% endif %}
+                </div>
+            </form>
+            <h5 class="mt-2">-or-</h5>
+            <div class="mr-2">
+                <h4 class="">Browse:</h4>
+                <div class="ui large buttons">
+                    <a href="{% url "programs:browse" %}?q=movies"><button class="ui button" >Movies</button></a>
+                  <div class="or"></div>
+                    <a href="{% url "programs:browse" %}?q=shows"><button class="ui button">Shows</button></a>
+                </div>
             </div>
-            <div class="text-center">
-                <button type="button" data-toggle="modal" data-target=".add-modal" class="text-center btn btn-primary">
-                    Add Movie
-                </button>
-            </div>
+
         </div>
-    {% endfor movies %}
+        <div class="text-center">
+        {% for movie in movies %}
+            <div class="card d-inline-block card-background" style="width: 18rem;">
+                <a href="/program/{{ movie.id }}">
+                    {% if content_type == 'movies' %}
+                        <img src="{{ movie.poster_240x342 }}" class="card-img-top" alt="...">
+                    {% endif %}
+                    {% if content_type == 'shows' %}
+                        <img src="{{ movie.artwork_304x171 }}" class="card-img-top" alt="...">
+                    {% endif %}
+                    {% if content_type == 'search' %}
+                        <img src="{{ movie.poster_240x342 }}" class="card-img-top" alt="...">
+                    {% endif %}
+                </a>
+                <div class="card-body">
+                    <h5 class="text-center font-weight-bold card-title"><a href="/program/{{ movie.id }}">{{ movie.title }}</a></h5>
+                </div>
+                <div class="text-center">
+                    <button type="button" data-toggle="modal" data-target=".add-modal" class="text-center mb-2 btn btn-primary">
+                        Add Movie
+                    </button>
+                </div>
+            </div>
+        {% endfor movies %}
+        </div>
     </div>
     {#    Hopefully I'll get to the pagination part#}
     {#    <div class="pagination">#}

@@ -1,24 +1,28 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-
-    <div class="row">
-        <div class="hero col">
-            <div class="bottom-border">
-                <h1>Less Browsing.</h1>
-                <h1>More Watching.</h1>
-                <p>Browse movies and shows from multiple streaming services you already subscribe to, and organize the movies and shows you want to watch,
-                so you spend less of your movie night picking what to watch, and more time watching.</p>
-                <div class="text-center row">
-                    <div class="col"><a href="{% url "users:signup" %}" class="btn btn-primary animated-button thar-four">Signup</a></div>
-                    <p class="col">-or-</p>
-                    <div class="col"><a href="#info" class="btn btn-sm animated-button thar-four">How It Works</a></div>
+    <div class="container-fluid mb-md-5">
+        <div class="row topped-out">
+            <div class="topped-out-1 col-md-6">
+                <div class="bottom-border">
+                    <h1 class="closer">Less Browsing.</h1>
+                    <h1 class="closer2">More Watching.</h1>
+                    <p class="text-center">Browse movies and shows from multiple streaming services you already subscribe to, and organize the movies and shows you want to watch,
+                    so you spend less of your movie night picking what to watch, and more time watching.</p>
+                    <div class="text-center topped-out-1 row">
+                        <div class="col mt-2"><a href="{% url "users:signup" %}" class="btn btn-primary animated-button thar-four">Signup</a></div>
+                        <p class="col mt-4">-or-</p>
+                        <div class="col "><a href="#info" class="btn btn-sm animated-button thar-four">How It Works</a></div>
+                    </div>
                 </div>
             </div>
+            <div class="col-md-6">
+                <img class="family" src="{% static "media/family.jpg" %}" alt="">
+            </div>
         </div>
-        <div class="col hero border-bottom">
-            <img class="family" src="{% static "media/family.jpg" %}" alt="">
-        </div>
+    </div>
+    <div>
+        <img id="info" class="topped-out mb-md-5 w-100" src="{% static 'media/infographic.png' %}" alt="">
     </div>
 
 
