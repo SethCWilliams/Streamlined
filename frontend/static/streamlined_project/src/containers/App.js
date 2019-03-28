@@ -6,6 +6,7 @@ import plus from '../plus.png';
 import FolderModal from '../component/Modal'
 import NewFolder from "../component/NewFolder";
 import EditFolder from "../component/EditFolder";
+import divWithClassName from "react-bootstrap/es/utils/divWithClassName";
 
 // import * as edit from 'react-edit';
 
@@ -23,7 +24,7 @@ class App extends Component {
         this.updateFolder = this.updateFolder.bind(this);
         this.deleteFolder = this.deleteFolder.bind(this);
         this.cancelEdit = this.cancelEdit.bind(this);
-        this.removeProgram = this.removeProgram.bind(this);
+
     }
 
     doEdit(folder) {
@@ -72,9 +73,7 @@ class App extends Component {
         this.setState({isEditing: false})
     }
 
-    removeProgram(){
 
-    }
 
     addFolder(dataObject) {
         let folder_title = dataObject.folder_title;
@@ -119,23 +118,26 @@ class App extends Component {
         console.log('edit', this.state.isEditing);
         console.log('look here', this.state.folders);
         return (
-            <div className="row">
-                <Card className="add-card-params" style={{width: '12rem'}}>
-                    <Card.Img className='image-params' variant='top' src={plus}/>
-                    <Card.Body>
-                        <Card.Title>Add A List</Card.Title>
-                        <Card.Text className='card-text'>
-                        </Card.Text>
-                        <div className="surrounding">
-                        <FolderModal addFolder={this.addFolder}/>
-                        </div>
-                    </Card.Body>
-                </Card>
-                {this.state.isEditing ? (
-                    <EditFolder folder={this.state.isEditing} update={this.updateFolder}
-                                delete={this.deleteFolder} cancel={this.cancelEdit}/>) : (
 
-                    <NewFolder newfolders={this.state.folders} edit={this.doEdit}/>
+            <div className="folder-management">
+                <div className="text-center mb-2 folder-modal">
+                    <FolderModal addFolder={this.addFolder}/>
+                </div>
+
+                {this.state.isEditing ? (
+                    <EditFolder
+                        folder={this.state.isEditing}
+                        update={this.updateFolder}
+                        delete={this.deleteFolder}
+                        cancel={this.cancelEdit}
+                    />
+                ) : (
+                    <div className='new-folder'>
+                        <NewFolder
+                            newfolders={this.state.folders}
+                            edit={this.doEdit}
+                        />
+                    </div>
                 )}
 
             </div>

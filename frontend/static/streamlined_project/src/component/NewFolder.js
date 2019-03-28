@@ -10,9 +10,10 @@ export default class NewFolder extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            folder: []
+            folder: {programs: []}
         };
         this.handleShow = this.handleShow.bind(this);
+        this.removeProgram = this.removeProgram.bind(this);
     }
 
     handleShow() {
@@ -23,6 +24,31 @@ export default class NewFolder extends Component {
         // data.preventDefault();
         this.setState({folder: data})
     }
+
+    removeProgram(data){
+        console.log("state of folder", this.state.folder);
+        console.log("state of program", data);
+        let folder_id = this.state.folder.id;
+        let program_id = data.id;
+        console.log(folder_id);
+        console.log(program_id);
+        fetch(`api/folder/${folder_id}/program/${program_id}/`, {
+            method: 'DELETE',
+        }).then((response) => {
+            let folder = this.state.folder;
+            let programs = this.state.folder.programs;
+            programs = programs.filter((program) => {
+                return program.id !== data.id;
+            });
+
+            folder.programs = programs;
+
+            this.setState({folder: folder});
+
+        })
+        .catch(error => console.log('you wrong', error))
+    }
+
     render() {
         let folders = this.props.newfolders.map((folder) => {
             console.log('newfolder', folder);
@@ -32,8 +58,6 @@ export default class NewFolder extends Component {
                          <Card.Img className='image-params' variant='top' src={folder.icon}/>
                          <Card.Body>
                              <Card.Title className="folder-title">{folder.folder_title}</Card.Title>
-                             <Card.Text className='card-text'>
-                             </Card.Text>
                          </Card.Body>
                         <div className="text-center">
                         <Button className="stacked-buttons" onClick={() => {this.props.edit(folder)}}>Edit Folder</Button>
@@ -46,12 +70,16 @@ export default class NewFolder extends Component {
          });
         return(
             <div>
-                <div className=" folders">
-                    {folders}
+            <div className='row'>
+                <div className="col container-outer folders">
+                    <div className="container-inner">
+                        {folders}
+                    </div>
                 </div>
-                <div className="folder-content">
-                    <FolderContent foldercontent={this.state.folder}/>
-                </div>
+            </div>
+            <div className="row folder-content">
+                <FolderContent foldercontent={this.state.folder} removeProgram={this.removeProgram}/>
+            </div>
             </div>
         )
     }

@@ -28,26 +28,26 @@ export default class FolderContent extends Component {
 
         // }
         return (
-            <div>
-                {this.props.foldercontent.folder_title}
+            <div className="bored">
+                <h2 className="text-center ">{this.props.foldercontent.folder_title}</h2>
+                <div className="row text-center m-3">
                 {programs &&
                 programs.map((program) => {
                     console.log(program);
                     return (
-                        <div className="content-card">
-                            <Card onHover style={{width: '12rem'}}>
+                        <div className="content-card col">
+                            <Card className="carded" style={{width: '12rem'}}>
                                 <Card.Img className='cover' variant='top' src={program.poster}/>
-                                <Card.Body className="content-card">
-                                    <Card.Title><a href={`/program/${program.ref_id}/`}>{program.title}</a></Card.Title>
-                                    <Card.Text className='card-text'>
-                                        <Button>Remove {program.title}</Button>
-                                    </Card.Text>
+                                <Card.Body className="card-body">
+                                    <Card.Title className="card-title"><a href={`/program/${program.ref_id}/`}>{program.title}</a></Card.Title>
+                                        <Button className="remove-button" onClick={() => {this.props.removeProgram(program)}} >Remove</Button>
                                 </Card.Body>
                             </Card>
                         </div>
                     )
                 })
                 }
+                </div>
 
             </div>
         )

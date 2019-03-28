@@ -50,13 +50,13 @@ export default class EditFolder extends Component {
 
     render() {
         return (
-
-            <form id="uploadForm" onSubmit={e => {
+            <div className="height">
+            <form className="height" id="uploadForm" onSubmit={e => {
                 e.preventDefault();
             }}>
-                <h2>Edit Folder</h2>
+                <h2>Edit Your Folder</h2>
                 <hr/>
-                <img src={this.state.icon} alt=""/>
+                <img className="edit-image" src={this.state.icon} alt=""/>
                 <input
                     name='icon'
                     id='icon'
@@ -76,6 +76,7 @@ export default class EditFolder extends Component {
                     </button>
                 </div>
             </form>
+            </div>
         )
     }
 }

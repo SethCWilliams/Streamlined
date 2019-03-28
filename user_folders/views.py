@@ -5,6 +5,7 @@ from django.views.generic import TemplateView, FormView
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .forms import SearchForm
+from apikey import guidebox_api_key
 from django.core.paginator import Paginator
 # from justwatch import JustWatch
 
@@ -23,8 +24,8 @@ class BrowseView(FormView):
         # except Program.DoesNotExist:
             # ref_id = self.kwargs.get('ref_id')
         response = requests.get(
-            'http://api-public.guidebox.com/v2/movies/{}?api_key=0a40830bfa01ed3fca505f5e01ab1a5d54e281da'.format(
-                ref_id))
+            'http://api-public.guidebox.com/v2/movies/{}?api_key={}'.format(
+                ref_id, guidebox_api_key))
         program = response.json()
         print('code', response.status_code)
         return program
@@ -37,7 +38,7 @@ class BrowseView(FormView):
         # similar setup will be needed for search to work
         # & field = title & type = movie & query = terminator
         response = requests.get(
-            'http://api-public.guidebox.com/v2/{}?api_key=0a40830bfa01ed3fca505f5e01ab1a5d54e281da&field=title&type=movie&query={}&sources=amazon_prime,hulu_plus,netflix&limit=250'.format(content_type, query))
+            'http://api-public.guidebox.com/v2/{}?api_key={}&field=title&type=movie&query={}&sources=amazon_prime,hulu_plus,netflix&limit=250'.format(content_type, guidebox_api_key, query))
         movielist = response.json()
         # print(movielist)
         # starting to play with paginator, but will come back after i get other more important stuff done
@@ -57,7 +58,7 @@ class BrowseView(FormView):
 
         ctx = {
             'content_type': content_type,
-            'movies': movielist['results'],
+            'movies': movielist.get('results'),
             'folders': Folder.objects.filter(user=self.request.user),
             # 'ref_id': movies.results['id']
         }
@@ -78,8 +79,8 @@ class DetailView(TemplateView):
         # except Program.DoesNotExist:
             # ref_id = self.kwargs.get('ref_id')
         response = requests.get(
-            'http://api-public.guidebox.com/v2/movies/{}?api_key=0a40830bfa01ed3fca505f5e01ab1a5d54e281da'.format(
-                ref_id))
+            'http://api-public.guidebox.com/v2/movies/{}?api_key={}'.format(
+                ref_id, guidebox_api_key))
         program = response.json()
         print('code', response.status_code)
         return program

@@ -2,7 +2,8 @@ from django.contrib import admin
 from django.urls import path
 from . import views
 
-from .api import FolderViewSet, ProgramViewSet, UpdateFolderViewSet, DeleteFolderViewSet
+from .api import FolderViewSet, ProgramViewSet, UpdateFolderViewSet, DeleteFolderViewSet, RemoveProgramViewSet
+# RemoveProgramViewSet
 
 app_name = 'programs'
 
@@ -23,11 +24,6 @@ urlpatterns = [
     path('api/folder/<int:pk>/', DeleteFolderViewSet.as_view(), name='delete'),
     path('program/browse/', views.BrowseView.as_view(), name='browse'),
     path('program/<int:ref_id>/', views.DetailView.as_view(), name='detail'),
-    # path('folder_content/', views.FolderContentViewset.as_view({
-    #     'get': 'list',
-    #     'post': 'create',
-    #     'put': 'update',
-    #     'delete': 'destroy',
-    # }), name="folder_content")
-# <int:ref_id>/
+    path('api/folder/<int:pk>/program/<int:choice_pk>/', RemoveProgramViewSet.as_view(), name="remove_program")
+
 ]

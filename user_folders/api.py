@@ -1,5 +1,9 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.generics import DestroyAPIView, UpdateAPIView
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from django.http import Http404
 
 from .models import Folder, Program
 from .serializers import FolderSerializer, ProgramSerializer
@@ -48,3 +52,18 @@ class DeleteFolderViewSet(DestroyAPIView):
     model = Folder
     queryset = Folder.objects.all()
     serializer_class = FolderSerializer
+
+
+class RemoveProgramViewSet(DestroyAPIView):
+    authentication_classes = (CsrfExemptMixin, )
+    model = Folder
+    serializer_class = FolderSerializer
+    queryset = Folder.objects.filter()
+
+    def delete(self, request, *args, **kwargs):
+
+        folder = Folder.objects.get(pk=self.kwargs.get('pk'), user=request.user)
+        program = Program.objects.get(pk=self.kwargs.get('choice_pk'))
+        folder.programs.remove(program)
+
+        return Response(status=status.HTTP_204_NO_CONTENT)

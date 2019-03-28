@@ -54,9 +54,12 @@ export default class FolderModal extends Component {
     render() {
         return (
             <div className="text-center">
-                <Button className="add-button text-center" variant="primary" onClick={this.handleShow}>
-                    Add
-                </Button>
+                <button onClick={this.handleShow} className="ui add-button animated primary button" tabIndex="0">
+                    <div className="visible content pt-2">Make A List</div>
+                    <div className="hidden content">
+                        <i className="add-button plus icon"></i>
+                    </div>
+                </button>
 
                 <Modal show={this.state.show} onHide={this.handleClose}>
                     <Modal.Title>New Folder</Modal.Title>
