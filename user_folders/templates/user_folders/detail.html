@@ -20,16 +20,28 @@
 {#                </button>#}
 {#            </div>#}
 {#        </div>#}
-        <div class="ui grid">
+        <div class="ui grid m-3">
             <div class="row">
-                <div class="four wide column">
+                <div class="five wide column">
                     <div class="row">
                     <h2 class="column" id="{{ id }}">{{ title }}</h2>
                     <h6 class="column">{{ rating }}</h6>
                     </div>
                     <img class="row" src={{ poster }} alt="">
                 </div>
-                <div class="seven wide column"></div>
+                <div class="eight wide column mt-5">
+                    <div class="row">
+                        <h3 class="column"><span class="point">Release Year: </span> {{ release_year }}</h3>
+                        <h4 class="column"><span class="point">Description: </span>{{ overview }}</h4>
+                        <div class="column">
+                        {% for source in web_source %}
+                            <h3 class="bottom-border">Watch on {{ source.display_name }}: <a href="{{ source.link }}"><span class="point">{{ title }}</span></a></h3>
+                        {% endfor web_source %}
+                        </div>
+                    </div>
+
+
+                </div>
             </div>
             <div class="row">
                 <div class="ten wide column"><h1></h1></div>
