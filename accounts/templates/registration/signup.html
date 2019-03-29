@@ -1,9 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="text-center">
+    <div class="container-fluid">
+    <div class="">
+{#        <div class="col-md-6 col-md-offset-6">#}
         <h2>Sign Up!</h2>
-        <form method="post" action="{% url 'users:signup' %}">
+        <div class="">
+            <div class="">
+        <form class="" method="post" action="{% url 'users:signup' %}">
             {% csrf_token %}
             <table>
                 <tr>
@@ -34,9 +38,13 @@
 
             <input type="submit" value="Signup">
         </form>
+            </div>
+        </div>
 
 
         <p><a href="{% url 'users:login' %}">Already Have an Account? Login.</a></p>
+{#        </div>#}
+    </div>
     </div>
 
 {% endblock content %}
