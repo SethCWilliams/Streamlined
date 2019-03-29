@@ -8,7 +8,7 @@ from django.urls import reverse
 from .forms import SearchForm
 from django.core.paginator import Paginator
 # from justwatch import JustWatch
-GUIDEBOX_API_KEY = os.environ['GUIDEBOX_API_KEY']
+guidebox_api_key = os.environ['GUIDEBOX_API_KEY']
 
 class BrowseView(FormView):
     template_name = 'user_folders/browse.html'
@@ -25,7 +25,7 @@ class BrowseView(FormView):
             # ref_id = self.kwargs.get('ref_id')
         response = requests.get(
             'http://api-public.guidebox.com/v2/movies/{}?api_key={}'.format(
-                ref_id, GUIDEBOX_API_KEY))
+                ref_id, guidebox_api_key))
         program = response.json()
         print('code', response.status_code)
         return program
@@ -38,7 +38,7 @@ class BrowseView(FormView):
         # similar setup will be needed for search to work
         # & field = title & type = movie & query = terminator
         response = requests.get(
-            'http://api-public.guidebox.com/v2/{}?api_key={}&field=title&type=movie&query={}&sources=amazon_prime,hulu_plus,netflix&limit=250'.format(content_type, GUIDEBOX_API_KEY, query))
+            'http://api-public.guidebox.com/v2/{}?api_key={}&field=title&type=movie&query={}&sources=amazon_prime,hulu_plus,netflix&limit=250'.format(content_type, guidebox_api_key, query))
         movielist = response.json()
         # print(movielist)
         # starting to play with paginator, but will come back after i get other more important stuff done
@@ -80,7 +80,7 @@ class DetailView(TemplateView):
             # ref_id = self.kwargs.get('ref_id')
         response = requests.get(
             'http://api-public.guidebox.com/v2/movies/{}?api_key={}'.format(
-                ref_id, GUIDEBOX_API_KEY))
+                ref_id, guidebox_api_key))
         program = response.json()
         print('code', response.status_code)
         return program
