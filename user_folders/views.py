@@ -1,14 +1,14 @@
 from django.shortcuts import render
+import os
 import requests
 from user_folders.models import Folder, Program
 from django.views.generic import TemplateView, FormView
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .forms import SearchForm
-from apikey import guidebox_api_key
 from django.core.paginator import Paginator
 # from justwatch import JustWatch
-
+GUIDEBOX_API_KEY = os.environ['GUIDEBOX_API_KEY']
 
 class BrowseView(FormView):
     template_name = 'user_folders/browse.html'
@@ -25,7 +25,7 @@ class BrowseView(FormView):
             # ref_id = self.kwargs.get('ref_id')
         response = requests.get(
             'http://api-public.guidebox.com/v2/movies/{}?api_key={}'.format(
-                ref_id, guidebox_api_key))
+                ref_id, GUIDEBOX_API_KEY))
         program = response.json()
         print('code', response.status_code)
         return program
@@ -38,7 +38,7 @@ class BrowseView(FormView):
         # similar setup will be needed for search to work
         # & field = title & type = movie & query = terminator
         response = requests.get(
-            'http://api-public.guidebox.com/v2/{}?api_key={}&field=title&type=movie&query={}&sources=amazon_prime,hulu_plus,netflix&limit=250'.format(content_type, guidebox_api_key, query))
+            'http://api-public.guidebox.com/v2/{}?api_key={}&field=title&type=movie&query={}&sources=amazon_prime,hulu_plus,netflix&limit=250'.format(content_type, GUIDEBOX_API_KEY, query))
         movielist = response.json()
         # print(movielist)
         # starting to play with paginator, but will come back after i get other more important stuff done
@@ -80,7 +80,7 @@ class DetailView(TemplateView):
             # ref_id = self.kwargs.get('ref_id')
         response = requests.get(
             'http://api-public.guidebox.com/v2/movies/{}?api_key={}'.format(
-                ref_id, guidebox_api_key))
+                ref_id, GUIDEBOX_API_KEY))
         program = response.json()
         print('code', response.status_code)
         return program

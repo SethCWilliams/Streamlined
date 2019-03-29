@@ -42,7 +42,7 @@ export default class FolderContent extends Component {
                                     <Card.Title className="card-title"><a href={`/program/${program.ref_id}/`}>{program.title}</a></Card.Title>
                                         <Button className="remove-button" onClick={() => {this.props.removeProgram(program)}} >Remove</Button>
                                 </Card.Body>
-                            </Card>
+                            </Card>g
                         </div>
                     )
                 })
